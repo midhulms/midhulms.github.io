@@ -3,1480 +3,1352 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Midhul M S | Currently pursuing Master in Business Analytics @ EMLV Paris</title>
+    <title>Midhul M S | Business Analytics &amp; Data Professional</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #2563eb;      /* Vibrant blue */
-            --secondary: #0f172a;    /* Dark navy */
-            --accent: #3b82f6;      /* Lighter blue */
-            --text: #e2e8f0;         /* Light gray */
-            --dark-text: #1e293b;    /* Dark gray */
-            --background: #020617;   /* Very dark blue (almost black) */
-            --card-bg: #1e293b;      /* Dark blue-gray */
-            --light-gray: #334155;   /* Medium gray */
+            --primary: #2563eb;
+            --secondary: #0f172a;
+            --accent: #3b82f6;
+            --text: #e2e8f0;
+            --dark-text: #1e293b;
+            --background: #020617;
+            --card-bg: #1e293b;
+            --light-gray: #334155;
+            --green: #10b981;
         }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
         body {
             font-family: 'Montserrat', sans-serif;
             line-height: 1.6;
             color: var(--text);
             background-color: var(--background);
-            scroll-behavior: smooth;
+            overflow-x: hidden;
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* ── Scroll Progress ── */
+        .scroll-progress {
+            position: fixed; top: 0; left: 0; height: 3px; z-index: 2000;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            width: 0%; transition: width 0.1s linear;
         }
-        
-        /* Header Styles */
+
+        /* ── Header ── */
         header {
             background-color: rgba(2, 6, 23, 0.9);
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
+            position: fixed; width: 100%; top: 0; z-index: 1000;
             backdrop-filter: blur(10px);
         }
-        
+
         nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
+            display: flex; justify-content: space-between;
+            align-items: center; padding: 20px 0;
         }
-        
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: white;
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo span {
-            color: var(--primary);
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-        
+
+        .logo { font-size: 1.5rem; font-weight: 700; color: white; }
+        .logo span { color: var(--primary); }
+
+        .nav-links { display: flex; gap: 30px; }
         .nav-links a {
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 500;
-            transition: all 0.3s;
-            position: relative;
+            text-decoration: none; color: var(--text); font-weight: 500;
+            transition: all 0.3s; position: relative;
         }
-        
-        .nav-links a:hover {
-            color: var(--accent);
-        }
-        
         .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            bottom: -5px;
-            left: 0;
+            content: ''; position: absolute; width: 0; height: 2px;
+            background-color: var(--accent); bottom: -5px; left: 0;
             transition: width 0.3s;
         }
-        
-        .nav-links a:hover::after {
-            width: 100%;
+        .nav-links a:hover { color: var(--accent); }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* Mobile Menu */
+        .hamburger {
+            display: none; flex-direction: column; gap: 5px;
+            cursor: pointer; background: none; border: none; padding: 4px;
         }
-        
+        .hamburger span {
+            display: block; width: 24px; height: 2px;
+            background: white; transition: all 0.3s;
+        }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        .mobile-nav {
+            display: none; position: fixed; top: 70px; left: 0; width: 100%;
+            background: rgba(2, 6, 23, 0.97); backdrop-filter: blur(20px);
+            padding: 20px; flex-direction: column; gap: 16px;
+            border-bottom: 1px solid var(--light-gray);
+            transform: translateY(-100%); opacity: 0;
+            transition: all 0.4s ease;
+        }
+        .mobile-nav.open { transform: translateY(0); opacity: 1; }
+        .mobile-nav a {
+            color: var(--text); text-decoration: none; font-size: 1rem;
+            font-weight: 500; padding: 8px 0;
+        }
+
+        /* ── Buttons ── */
         .btn {
-            display: inline-block;
-            background-color: var(--primary);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            border: 2px solid var(--primary);
+            display: inline-block; background-color: var(--primary);
+            color: white; padding: 12px 24px; border-radius: 5px;
+            text-decoration: none; font-weight: 600; transition: all 0.3s;
+            border: 2px solid var(--primary); cursor: pointer;
+            font-family: 'Montserrat', sans-serif; font-size: 0.95rem;
         }
-        
         .btn:hover {
-            background-color: transparent;
-            color: var(--primary);
+            background-color: transparent; color: var(--primary);
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
         }
-        
         .btn-outline {
-            background-color: transparent;
-            border: 2px solid var(--primary);
+            background-color: transparent; border: 2px solid var(--primary);
             color: var(--primary);
         }
-        
-        .btn-outline:hover {
-            background-color: var(--primary);
-            color: white;
-        }
-        
-        section {
-            padding: 100px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        
+        .btn-outline:hover { background-color: var(--primary); color: white; }
+
+        section { padding: 100px 0; }
+
+        .section-title { text-align: center; margin-bottom: 60px; }
         .section-title h2 {
-            font-size: 2.5rem;
-            color: white;
-            position: relative;
-            display: inline-block;
+            font-size: 2.5rem; color: white;
+            position: relative; display: inline-block;
         }
-        
         .section-title h2::after {
-            content: '';
-            position: absolute;
-            width: 50%;
-            height: 3px;
+            content: ''; position: absolute;
+            width: 50%; height: 3px;
             background: linear-gradient(90deg, var(--primary), var(--accent));
-            bottom: -10px;
-            left: 25%;
-            border-radius: 3px;
+            bottom: -10px; left: 25%; border-radius: 3px;
         }
-        
-        /* Hero Section */
+
+        /* ── Scroll Reveals ── */
+        .fade-in {
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .slide-left {
+            opacity: 0; transform: translateX(-40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .slide-left.visible { opacity: 1; transform: translateX(0); }
+        .slide-right {
+            opacity: 0; transform: translateX(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .slide-right.visible { opacity: 1; transform: translateX(0); }
+
+        /* ── Hero ── */
         .hero {
-            padding: 180px 0 100px;
-            display: flex;
-            align-items: center;
-            gap: 50px;
-            background: linear-gradient(135deg, rgba(2, 6, 23, 0.9), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1639762681057-408e52192e55?q=80&w=2232&auto=format&fit=crop') no-repeat center center/cover;
-            position: relative;
-            overflow: hidden;
+            padding: 180px 0 100px; display: flex; align-items: center;
+            position: relative; overflow: hidden;
         }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0) 70%);
-            top: -100px;
-            right: -100px;
-            border-radius: 50%;
-            z-index: 0;
+        .hero-bg {
+            position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse 70% 50% at 80% 30%, rgba(37, 99, 235, 0.12) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 40% at 10% 70%, rgba(59, 130, 246, 0.06) 0%, transparent 60%),
+                var(--background);
         }
-        
-        .hero-content {
-            flex: 1;
-            position: relative;
-            z-index: 1;
+        #particles-canvas {
+            position: absolute; inset: 0; z-index: 1; pointer-events: none;
         }
-        
+        .hero .container {
+            position: relative; z-index: 2;
+            display: flex; align-items: center; gap: 50px;
+        }
+        .hero-content { flex: 1; }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(37, 99, 235, 0.12); border: 1px solid rgba(37, 99, 235, 0.3);
+            border-radius: 24px; padding: 6px 16px;
+            font-size: 0.8rem; font-weight: 600; color: var(--accent);
+            letter-spacing: 0.04em; margin-bottom: 24px;
+        }
+        .hero-badge .dot {
+            width: 7px; height: 7px; border-radius: 50%;
+            background: var(--green);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
+            50% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+        }
         .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            color: white;
-            line-height: 1.2;
+            font-size: 3.2rem; margin-bottom: 16px;
+            color: white; line-height: 1.15;
         }
-        
-        .hero h1 span {
-            color: var(--accent);
-            font-weight: 600;
+        .hero h1 .name { color: var(--accent); font-weight: 700; }
+        .hero .tagline {
+            font-size: 1.15rem; color: var(--accent);
+            font-weight: 600; margin-bottom: 20px;
         }
-        
+        .hero .tagline .cursor {
+            display: inline-block; width: 2px; height: 1.1em;
+            background: var(--accent); margin-left: 3px;
+            vertical-align: text-bottom;
+            animation: blink 0.8s step-end infinite;
+        }
+        @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
         .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            color: var(--text);
-            max-width: 600px;
+            font-size: 1.05rem; margin-bottom: 24px; color: var(--text);
+            max-width: 620px; line-height: 1.8;
         }
-        
-        .hero-btns {
-            display: flex;
-            gap: 20px;
-            margin-top: 30px;
+        .hero-motto {
+            font-size: 1.3rem; font-weight: 700; color: white;
+            margin-bottom: 28px; font-style: italic;
         }
-        
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 40px;
-        }
-        
+        .hero-btns { display: flex; gap: 20px; margin-bottom: 32px; }
+        .social-links { display: flex; gap: 15px; }
         .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: var(--card-bg);
-            color: var(--text);
-            font-size: 1.2rem;
+            display: flex; align-items: center; justify-content: center;
+            width: 42px; height: 42px; border-radius: 50%;
+            background-color: var(--card-bg); color: var(--text);
+            font-size: 1.1rem; transition: all 0.3s; text-decoration: none;
+        }
+        .social-links a:hover {
+            background-color: var(--primary); color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+        }
+        .hero-avatar {
+            width: 200px; height: 200px; border-radius: 50%;
+            border: 3px solid var(--primary); padding: 4px;
+            background: var(--card-bg); flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 3.5rem; font-weight: 700; color: var(--accent);
+            animation: float 5s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .hero-stats {
+            display: flex; gap: 32px; margin-top: 32px;
+            padding-top: 24px; border-top: 1px solid var(--light-gray);
+        }
+        .stat { text-align: center; }
+        .stat-num { font-size: 1.6rem; font-weight: 700; color: var(--accent); }
+        .stat-label {
+            font-size: 0.7rem; color: var(--text); opacity: 0.7;
+            text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px;
+        }
+
+        /* ── About ── */
+        .about-content { display: flex; gap: 50px; align-items: flex-start; }
+        .about-text { flex: 2; }
+        .about-text h3 { font-size: 1.5rem; margin-bottom: 16px; color: white; }
+        .about-text p { margin-bottom: 16px; line-height: 1.8; }
+        .about-text p strong { color: white; }
+        .about-sidebar { flex: 1; }
+        .about-sidebar h3 { font-size: 1.2rem; color: var(--accent); margin-bottom: 12px; }
+
+        .edu-block {
+            background: var(--card-bg); border-radius: 10px; padding: 18px;
+            margin-bottom: 14px; transition: transform 0.3s;
+        }
+        .edu-block:hover { transform: translateX(4px); }
+        .edu-block h4 { color: white; font-size: 0.95rem; margin-bottom: 3px; }
+        .edu-block .inst { font-size: 0.82rem; color: var(--accent); margin-bottom: 4px; }
+        .edu-block .year { font-size: 0.78rem; color: var(--text); opacity: 0.7; }
+        .edu-block .courses {
+            font-size: 0.78rem; color: var(--text); opacity: 0.7;
+            margin-top: 6px; line-height: 1.5;
+        }
+
+        .skill-tag {
+            display: inline-block; background-color: var(--primary);
+            color: white; padding: 5px 14px; border-radius: 20px;
+            margin: 4px; font-size: 0.82rem; font-weight: 500;
             transition: all 0.3s;
         }
-        
-        .social-links a:hover {
-            background-color: var(--primary);
-            color: white;
-            transform: translateY(-3px);
+        .skill-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(37, 99, 235, 0.3);
         }
-        
-       
 
-.circular-image-container {
-  width: 150px; /* Adjust the desired size of the circle */
-  height: 150px; /* Make width and height the same for a perfect circle */
-  margin: 20px auto; /* Add margin below the name and center the image */
-  border-radius: 50%; /* This is key to making the container circular */
-  overflow: hidden; /* Hide any parts of the image that extend beyond the circle */
-}
+        .lang-row { margin-top: 8px; }
+        .lang-row p { font-size: 0.88rem; margin-bottom: 6px; }
+        .lang-row strong { color: white; }
 
-.circular-image-container img {
-  width: 100%; /* Make the image fill the container */
-  height: 100%; /* Make the image fill the container */
-  object-fit: cover; /* Crop the image to fit without distortion */
-  /* You can use object-position: center; to ensure the center of the image is shown */
-}
-        
-        /* About Section */
-        .about-content {
-            display: flex;
-            gap: 50px;
-            align-items: center;
+        .award-highlight {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(59, 130, 246, 0.05));
+            border: 1px solid rgba(37, 99, 235, 0.25); border-radius: 10px;
+            padding: 18px 20px; margin-top: 20px;
+            display: flex; gap: 12px; align-items: flex-start;
+            transition: all 0.3s;
         }
-        
-        .about-text {
-            flex: 2;
+        .award-highlight:hover {
+            border-color: var(--accent);
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.2);
         }
-        
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: white;
-        }
-        
-        .about-text p {
-            margin-bottom: 20px;
-        }
-        
-        .about-skills {
-            flex: 1;
-        }
-        
-        .skill-tag {
-            display: inline-block;
-            background-color: var(--primary);
-            color: white;
-            padding: 6px 15px;
-            border-radius: 20px;
-            margin: 5px;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-        
-        /* Experience Section */
-        .timeline {
-            position: relative;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
+        .award-highlight .icon { font-size: 1.5rem; flex-shrink: 0; }
+        .award-highlight strong { color: var(--accent); font-size: 0.92rem; }
+        .award-highlight p { font-size: 0.82rem; color: var(--text); opacity: 0.8; margin-top: 4px; }
+
+        /* ── Timeline ── */
+        .experience { background: linear-gradient(180deg, var(--background), #060f1e); }
+        .timeline { position: relative; max-width: 900px; margin: 0 auto; }
         .timeline::after {
-            content: '';
-            position: absolute;
-            width: 2px;
-            background: linear-gradient(to bottom, var(--primary), var(--accent));
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -1px;
+            content: ''; position: absolute; width: 2px;
+            background: linear-gradient(to bottom, var(--primary), var(--accent), transparent);
+            top: 0; bottom: 0; left: 50%; margin-left: -1px;
         }
-        
         .timeline-item {
-            padding: 10px 40px;
-            position: relative;
-            width: 50%;
-            box-sizing: border-box;
-            margin-bottom: 30px;
+            padding: 10px 40px; position: relative;
+            width: 50%; margin-bottom: 30px;
         }
-        
         .timeline-item::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
+            content: ''; position: absolute;
+            width: 18px; height: 18px;
             background-color: var(--background);
             border: 3px solid var(--primary);
-            border-radius: 50%;
-            top: 15px;
-            z-index: 1;
+            border-radius: 50%; top: 15px; z-index: 1;
+            transition: all 0.3s;
         }
-        
-        .left {
-            left: 0;
+        .timeline-item:hover::after {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            box-shadow: 0 0 12px rgba(37, 99, 235, 0.5);
         }
-        
-        .right {
-            left: 50%;
-        }
-        
-        .left::after {
-            right: -10px;
-        }
-        
-        .right::after {
-            left: -10px;
-        }
-        
+        .left { left: 0; }
+        .right { left: 50%; }
+        .left::after { right: -9px; }
+        .right::after { left: -9px; }
+
         .timeline-content {
-            padding: 25px;
-            background-color: var(--card-bg);
+            padding: 24px; background-color: var(--card-bg);
             border-radius: 10px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid transparent;
         }
-        
         .timeline-content:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(37, 99, 235, 0.3);
         }
-        
-        .timeline-content h3 {
-            margin-bottom: 10px;
-            color: var(--accent);
-        }
-        
+        .timeline-content h3 { margin-bottom: 8px; color: var(--accent); font-size: 1.05rem; }
         .timeline-content h4 {
-            margin-bottom: 15px;
-            color: var(--text);
-            font-weight: 500;
+            margin-bottom: 14px; color: var(--text); font-weight: 500;
+            font-size: 0.85rem; opacity: 0.8;
         }
-        
-        .timeline-content p {
-            margin-bottom: 10px;
-        }
-        
-        .timeline-content ul {
-            padding-left: 20px;
-            margin-top: 10px;
-        }
-        
-        .timeline-content li {
-            margin-bottom: 8px;
-        }
-        
-        /* Skills Section */
+        .timeline-content ul { padding-left: 18px; margin-top: 8px; }
+        .timeline-content li { margin-bottom: 8px; font-size: 0.9rem; line-height: 1.65; }
+        .timeline-content li strong { color: white; }
+
+        /* ── Skills ── */
+        .skills { background: var(--background); }
         .skills-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 30px;
         }
-        
         .skill-category {
-            background-color: var(--card-bg);
-            padding: 25px;
+            background-color: var(--card-bg); padding: 25px;
             border-radius: 10px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s; border: 1px solid transparent;
+            position: relative; overflow: hidden;
         }
-        
+        .skill-category::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 3px; background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0); transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        .skill-category:hover::before { transform: scaleX(1); }
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(37, 99, 235, 0.2);
+        }
         .skill-category h3 {
-            margin-bottom: 20px;
-            color: var(--accent);
-            font-size: 1.3rem;
+            margin-bottom: 18px; color: var(--accent); font-size: 1.15rem;
+            display: flex; align-items: center; gap: 10px;
         }
-        
-        .skill-item {
-            margin-bottom: 15px;
-        }
-        
+        .skill-category h3 i { font-size: 1rem; }
+
+        .skill-item { margin-bottom: 14px; }
         .skill-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 5px;
+            display: flex; justify-content: space-between;
+            margin-bottom: 5px; font-size: 0.88rem;
         }
-        
+        .skill-info span:last-child { color: var(--accent); }
         .skill-bar {
-            height: 8px;
-            background-color: var(--light-gray);
-            border-radius: 4px;
-            overflow: hidden;
+            height: 7px; background-color: var(--light-gray);
+            border-radius: 4px; overflow: hidden;
         }
-        
         .skill-progress {
             height: 100%;
             background: linear-gradient(90deg, var(--primary), var(--accent));
-            border-radius: 4px;
+            border-radius: 4px; width: 0;
+            transition: width 1.2s ease;
         }
-        
-        /* Projects Section */
+
+        .skill-tags-list { display: flex; flex-wrap: wrap; gap: 8px; }
+        .stag {
+            background: var(--light-gray); color: var(--text);
+            padding: 5px 12px; border-radius: 6px; font-size: 0.8rem;
+            transition: all 0.2s; border: 1px solid transparent;
+        }
+        .stag:hover {
+            border-color: var(--accent); color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* ── Projects ── */
+        .projects { background: linear-gradient(180deg, #060f1e, var(--background)); }
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 30px;
         }
-        
         .project-card {
-            background-color: var(--card-bg);
-            border-radius: 10px;
+            background-color: var(--card-bg); border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.35s; display: flex; flex-direction: column;
+            border: 1px solid transparent;
         }
-        
         .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(37, 99, 235, 0.3);
         }
-        
         .project-image {
-            height: 200px;
-            background-color: var(--light-gray);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
+            height: 180px; background-color: var(--light-gray);
+            display: flex; align-items: center; justify-content: center;
+            position: relative; overflow: hidden;
         }
-        
         .project-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.3), rgba(59, 130, 246, 0.3));
-            opacity: 0;
-            transition: opacity 0.3s;
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.3), rgba(59, 130, 246, 0.2));
+            opacity: 0; transition: opacity 0.3s;
         }
-        
-        .project-card:hover .project-image::before {
-            opacity: 1;
-        }
-        
+        .project-card:hover .project-image::before { opacity: 1; }
         .project-image i {
-            font-size: 4rem;
-            color: var(--primary);
-            z-index: 1;
+            font-size: 3.5rem; color: var(--primary); z-index: 1;
+            transition: all 0.3s;
         }
-        
-        .project-info {
-            padding: 25px;
+        .project-card:hover .project-image i {
+            transform: scale(1.15); color: var(--accent);
         }
-        
-        .project-info h3 {
-            margin-bottom: 15px;
-            color: white;
-            font-size: 1.4rem;
+        .project-badge {
+            position: absolute; top: 12px; right: 12px;
+            background: var(--primary); color: white;
+            font-size: 0.72rem; font-weight: 600;
+            padding: 3px 10px; border-radius: 10px; z-index: 2;
         }
-        
+        .project-info { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+        .project-info h3 { margin-bottom: 12px; color: white; font-size: 1.2rem; }
         .project-info p {
-            margin-bottom: 20px;
+            margin-bottom: 18px; font-size: 0.88rem;
+            line-height: 1.75; flex: 1;
         }
-        
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        
+        .project-tech { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
         .tech-tag {
-            background-color: var(--primary);
-            color: white;
-            padding: 5px 12px;
-            border-radius: 5px;
-            font-size: 0.8rem;
-            font-weight: 500;
+            background-color: rgba(37, 99, 235, 0.15);
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            color: var(--accent); padding: 4px 12px;
+            border-radius: 5px; font-size: 0.78rem; font-weight: 500;
         }
-        
-        .project-links {
-            display: flex;
-            gap: 15px;
-        }
-        
+        .project-links { display: flex; gap: 15px; }
         .project-links a {
-            text-decoration: none;
-            color: var(--accent);
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            transition: color 0.3s;
+            text-decoration: none; color: var(--accent);
+            font-weight: 600; font-size: 0.85rem;
+            display: flex; align-items: center; gap: 5px;
+            transition: all 0.3s;
         }
-        
-        .project-links a:hover {
-            color: white;
-        }
-        
-        /* Certifications Section */
+        .project-links a:hover { color: white; transform: translateX(3px); }
+
+        /* ── Certifications ── */
+        .certifications { background: var(--background); }
         .certifications-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 20px;
         }
-        
         .certification-card {
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            padding: 25px;
+            background-color: var(--card-bg); border-radius: 10px;
+            padding: 24px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s;
+            transition: all 0.3s; border: 1px solid transparent;
         }
-        
         .certification-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-4px);
+            border-color: rgba(37, 99, 235, 0.3);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
         }
-        
-        .certification-card h3 {
-            margin-bottom: 15px;
-            color: white;
-        }
-        
-        .certification-card p {
-            margin-bottom: 10px;
-        }
-        
+        .certification-card h3 { margin-bottom: 12px; color: white; font-size: 1rem; }
+        .certification-card p { margin-bottom: 6px; font-size: 0.85rem; }
+        .certification-card p strong { color: var(--text); }
         .certification-card a {
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            margin-top: 15px;
-            transition: color 0.3s;
+            color: var(--accent); text-decoration: none; font-weight: 500;
+            display: inline-flex; align-items: center; gap: 5px;
+            margin-top: 12px; transition: color 0.3s; font-size: 0.85rem;
         }
-        
-        .certification-card a:hover {
-            color: white;
-        }
-        
-        /* Publications Section */
+        .certification-card a:hover { color: white; }
+
+        /* ── Publications ── */
+        .publications { background: #060f1e; }
         .publication-card {
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            padding: 30px;
+            background-color: var(--card-bg); border-radius: 10px;
+            padding: 30px; max-width: 800px; margin: 0 auto;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s; border: 1px solid transparent;
         }
-        
-        .publication-card h3 {
-            margin-bottom: 15px;
-            color: white;
-            font-size: 1.4rem;
+        .publication-card:hover {
+            border-color: rgba(37, 99, 235, 0.3);
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.3);
         }
-        
-        .publication-card p {
-            margin-bottom: 10px;
-        }
-        
+        .publication-card h3 { margin-bottom: 14px; color: white; font-size: 1.2rem; }
+        .publication-card p { margin-bottom: 8px; font-size: 0.88rem; }
+        .publication-card p strong { color: var(--text); }
         .publication-card a {
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            margin-top: 15px;
-            transition: color 0.3s;
+            color: var(--accent); text-decoration: none; font-weight: 500;
+            display: inline-flex; align-items: center; gap: 5px;
+            margin-top: 14px; transition: color 0.3s;
         }
-        
-        .publication-card a:hover {
-            color: white;
-        }
-        
-        /* Achievements Section */
+        .publication-card a:hover { color: white; }
+
+        /* ── Achievements ── */
+        .achievements { background: var(--background); }
         .achievements-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 20px;
         }
-        
         .achievement-card {
-            background-color: var(--card-bg);
-            border-radius: 10px;
+            background-color: var(--card-bg); border-radius: 10px;
             padding: 25px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s;
+            transition: all 0.3s; border: 1px solid transparent;
+            position: relative; overflow: hidden;
         }
-        
+        .achievement-card::before {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 4px; height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
+        }
         .achievement-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-4px);
+            border-color: rgba(37, 99, 235, 0.3);
         }
-        
-        .achievement-card h3 {
-            margin-bottom: 15px;
-            color: white;
-        }
-        
-        .achievement-card p {
-            margin-bottom: 10px;
-        }
-        
+        .achievement-card h3 { margin-bottom: 10px; color: white; font-size: 1rem; }
+        .achievement-card p { margin-bottom: 6px; font-size: 0.85rem; }
         .achievement-card a {
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            margin-top: 15px;
-            transition: color 0.3s;
+            color: var(--accent); text-decoration: none; font-weight: 500;
+            display: inline-flex; align-items: center; gap: 5px;
+            margin-top: 12px; transition: color 0.3s; font-size: 0.85rem;
         }
-        
-        .achievement-card a:hover {
-            color: white;
-        }
-        
-        /* Contact Section */
-        .contact-container {
-            display: flex;
-            gap: 50px;
-        }
-        
-        .contact-info {
-            flex: 1;
-        }
-        
-        .contact-info h3 {
-            margin-bottom: 20px;
-            color: white;
-        }
-        
-        .contact-details {
-            margin-bottom: 30px;
-        }
-        
+        .achievement-card a:hover { color: white; }
+
+        /* ── Contact ── */
+        .contact { background: #060f1e; }
+        .contact-container { display: flex; gap: 50px; }
+        .contact-info { flex: 1; }
+        .contact-info h3 { margin-bottom: 20px; color: white; font-size: 1.2rem; }
+        .contact-details { margin-bottom: 24px; }
         .contact-details p {
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
+            margin-bottom: 14px; display: flex;
+            align-items: center; gap: 14px; font-size: 0.92rem;
         }
-        
         .contact-details i {
-            font-size: 1.2rem;
-            color: var(--accent);
-            width: 30px;
-            text-align: center;
+            font-size: 1.1rem; color: var(--accent); width: 24px; text-align: center;
         }
-        
-        .contact-form {
-            flex: 1;
+        .contact-details a { color: var(--accent); text-decoration: none; }
+        .contact-details a:hover { color: white; }
+        .availability-box {
+            background: rgba(37, 99, 235, 0.08);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            border-radius: 10px; padding: 18px; margin-top: 20px;
         }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
+        .availability-box p { font-size: 0.85rem; line-height: 1.7; }
+        .availability-box strong { color: var(--accent); }
+
+        .contact-form { flex: 1; }
+        .form-group { margin-bottom: 18px; }
         .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: white;
+            display: block; margin-bottom: 7px; font-weight: 500;
+            color: white; font-size: 0.88rem;
         }
-        
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid var(--light-gray);
-            border-radius: 5px;
+        .form-group input, .form-group textarea {
+            width: 100%; padding: 12px 15px;
+            border: 1px solid var(--light-gray); border-radius: 8px;
             font-family: 'Montserrat', sans-serif;
-            background-color: var(--card-bg);
-            color: var(--text);
-            transition: border-color 0.3s;
+            background-color: var(--card-bg); color: var(--text);
+            font-size: 0.88rem; transition: border-color 0.3s;
         }
-        
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent);
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none; border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
         }
-        
-        .form-group textarea {
-            height: 150px;
-            resize: vertical;
-        }
-        
-        /* Footer */
+        .form-group textarea { height: 140px; resize: vertical; }
+
+        /* ── Footer ── */
         footer {
             background-color: var(--secondary);
-            padding: 40px 0;
-            text-align: center;
+            padding: 40px 0; text-align: center;
         }
-        
-        .footer-content {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
         .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 20px;
+            display: flex; justify-content: center;
+            gap: 24px; margin-bottom: 18px;
         }
-        
         .footer-links a {
-            color: var(--text);
-            text-decoration: none;
-            transition: color 0.3s;
+            color: var(--text); text-decoration: none;
+            font-size: 0.88rem; transition: color 0.3s;
         }
-        
-        .footer-links a:hover {
-            color: var(--accent);
+        .footer-links a:hover { color: var(--accent); }
+        .copyright { color: var(--text); opacity: 0.6; font-size: 0.85rem; }
+
+        /* ── Back to Top ── */
+        .back-to-top {
+            position: fixed; bottom: 30px; right: 30px; z-index: 999;
+            width: 44px; height: 44px; border-radius: 50%;
+            background: var(--primary); color: white; border: none;
+            font-size: 1rem; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; visibility: hidden; transform: translateY(12px);
+            transition: all 0.3s;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
         }
-        
-        .copyright {
-            color: var(--text);
-            opacity: 0.7;
-            font-size: 0.9rem;
+        .back-to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+        .back-to-top:hover {
+            background: var(--accent); transform: translateY(-3px);
         }
-        
-        /* Responsive Styles */
+
+        /* ── Responsive ── */
         @media (max-width: 992px) {
-            .hero {
-                flex-direction: column;
-                text-align: center;
-                padding: 150px 0 80px;
-            }
-            
-            .hero-btns {
-                justify-content: center;
-            }
-            
-            .social-links {
-                justify-content: center;
-            }
-            
-            .about-content {
-                flex-direction: column;
-            }
-            
-            .contact-container {
-                flex-direction: column;
-            }
+            .hero .container { flex-direction: column; text-align: center; }
+            .hero-btns, .social-links { justify-content: center; }
+            .hero-stats { justify-content: center; }
+            .hero p { margin-left: auto; margin-right: auto; }
+            .hero-avatar { margin: 0 auto; }
+            .about-content { flex-direction: column; }
+            .contact-container { flex-direction: column; }
+            .hamburger { display: flex; }
+            .nav-links { display: none; }
+            .mobile-nav { display: flex; }
         }
-        
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .hero h1 {
-                font-size: 2.8rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            .timeline::after {
-                left: 31px;
-            }
-            
-            .timeline-item {
-                width: 100%;
-                padding-left: 70px;
-                padding-right: 25px;
-            }
-            
-            .timeline-item::after {
-                left: 21px;
-            }
-            
-            .left::after, .right::after {
-                left: 21px;
-            }
-            
-            .right {
-                left: 0;
-            }
+            .hero h1 { font-size: 2.4rem; }
+            .timeline::after { left: 31px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 20px; }
+            .timeline-item::after { left: 22px; }
+            .left::after, .right::after { left: 22px; }
+            .right { left: 0; }
         }
-
-        .my-name {
-  text-align: center; /* Adjust alignment as needed */
-  /* Add other styling for your name */
-}
-
-.circular-image-container {
-  width: 150px; /* Adjust the desired size of the circle */
-  height: 150px; /* Make width and height the same for a perfect circle */
-  margin: 20px auto; /* Add margin below the name and center the image */
-  border-radius: 50%; /* This is key to making the container circular */
-  overflow: hidden; /* Hide any parts of the image that extend beyond the circle */
-}
-
-.circular-image-container img {
-  width: 100%; /* Make the image fill the container */
-  height: 100%; /* Make the image fill the container */
-  object-fit: cover; /* Crop the image to fit without distortion */
-  /* You can use object-position: center; to ensure the center of the image is shown */
-}
-
         @media (max-width: 576px) {
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            
-            .hero-btns {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .btn {
-                width: 100%;
-                text-align: center;
-            }
-            
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
+            .hero h1 { font-size: 2rem; }
+            .hero-btns { flex-direction: column; gap: 12px; }
+            .btn { width: 100%; text-align: center; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .hero-stats { gap: 18px; flex-wrap: wrap; }
+            .certifications-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo">Midhul<span>.M.S</span></div>
-                <div class="nav-links">
-                    <a href="#about">About</a>
-                    <a href="#experience">Experience</a>
-                    <a href="#skills">Skills</a>
-                    <a href="#projects">Projects</a>
-                    <a href="#certifications">Certifications</a>
-                    <a href="#contact">Contact</a>
-                </div>
-                <a href="https://drive.google.com/file/d/1mwCFXf012huuQ8uLv0grtNT2xMn8ZMVV/view?usp=sharing" class="btn">Download Resume</a>
-            </nav>
+
+<!-- Scroll Progress -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- Header -->
+<header>
+    <div class="container">
+        <nav>
+            <div class="logo">Midhul<span>.M.S</span></div>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#experience">Experience</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#certifications">Certifications</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+            <a href="https://drive.google.com/file/d/1mwCFXf012huuQ8uLv0grtNT2xMn8ZMVV/view?usp=sharing" class="btn" target="_blank">Download Resume</a>
+        </nav>
+    </div>
+    <div class="mobile-nav" id="mobileNav">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#contact">Contact</a>
+    </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-bg"></div>
+    <canvas id="particles-canvas"></canvas>
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-badge fade-in"><span class="dot"></span> Open to Internship, June 2026</div>
+            <h1 class="fade-in">Hi, I'm <span class="name">Midhul M S</span></h1>
+            <div class="tagline fade-in"><span id="typed-text"></span><span class="cursor"></span></div>
+            <p class="fade-in">Business Analytics Professional with 5+ years of experience spanning semiconductor validation, data analytics, and automation engineering. Transitioned from three years of hardware debugging at Intel into analytics, driven by the insight that data visibility is the most critical factor in engineering performance.</p>
+            <p class="fade-in">Architected KPI dashboards and Python automation pipelines at UST Global (client: Intel), reducing stakeholder reporting time by 40% and contributing to a 15% improvement in driver performance across validation releases. Recognised with the USTAR Recognition Award, granted to fewer than 5% of contributors, for delivering actionable data insights that accelerated defect resolution and decision-making.</p>
+            <div class="hero-motto fade-in">"Stay Curious. Keep Learning."</div>
+            <div class="hero-btns fade-in">
+                <a href="#contact" class="btn">Get In Touch</a>
+                <a href="#projects" class="btn btn-outline">View Projects</a>
+            </div>
+            <div class="social-links fade-in">
+                <a href="https://linkedin.com/in/midhul-m-s" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/midhulms" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="mailto:midhulmsofficial@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+            <div class="hero-stats fade-in">
+                <div class="stat"><div class="stat-num" data-target="5">0</div><div class="stat-label">Years Experience</div></div>
+                <div class="stat"><div class="stat-num" data-target="85">0</div><div class="stat-label">Model Accuracy %</div></div>
+                <div class="stat"><div class="stat-num" data-target="8">0</div><div class="stat-label">Projects Delivered</div></div>
+                <div class="stat"><div class="stat-num" data-target="95">0</div><div class="stat-label">On-Time Delivery %</div></div>
+            </div>
         </div>
-    </header>
+        <div class="hero-avatar fade-in">MS</div>
+    </div>
+</section>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Hi, I'm <span>Midhul M S</span></h1>
-                
-                <h1>Currently pursuing Master in Business Analytics @ EMLV Paris</h1>
-                
-                <p>With 3+ years of experience in semiconductor product validation @    UST(INTEL), currently pursuing an MSc in Digital Business & Analytics in Paris.
-I specialise in solving complex problems using critical thinking, data analysis, and debugging experience from semiconductor GPU systems.
-I work with Python, SQL, C/C++ and tools like Power BI and Tableau to turn data into clear, actionable insights.
-I enjoy connecting technical solutions with real business impact.
-                    
-    🔍 Open to a 6-month internship (June–Nov 2026), related field.</p>
+<!-- About -->
+<section id="about" class="about">
+    <div class="container">
+        <div class="section-title fade-in"><h2>About Me</h2></div>
+        <div class="about-content">
+            <div class="about-text slide-left">
+                <p>I'm now at EMLV Paris, completing an MSc in Digital Business &amp; Analytics. Currently building forecasting models, Power BI dashboards, and experimenting with LLM-powered workflows (LangGraph, N8N). My French is at A2 and climbing fast (Alliance Fran&ccedil;aise, targeting B1 by end of 2025).</p>
+                <p>I work with <strong>Python, SQL, C/C++</strong> and tools like <strong>Power BI and Tableau</strong> to turn data into clear, actionable insights. I enjoy connecting technical solutions with real business impact.</p>
+                <p>I'm looking for a <strong>6-month internship from June 2026</strong>, in a team where data drives real decisions: analytics, BI, data engineering, or digital strategy. If that sounds like your team, I'd love to connect.</p>
 
-                <h1><b>Stay Curious. Keep Learning</b></h1>
-                <div class="hero-btns">
-                    <a href="#contact" class="btn">Get In Touch</a>
-                    <a href="#projects" class="btn btn-outline">View Projects</a>
+                <div class="award-highlight fade-in">
+                    <div class="icon">&#127942;</div>
+                    <div>
+                        <strong>USTAR Recognition Award</strong>
+                        <p>UST Global, March 2023. Recognised for outstanding impact in semiconductor debugging, log analysis, and cross-team coordination on Intel GPU validation programmes. Awarded to fewer than 5% of contributors.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="about-sidebar slide-right">
+                <h3>Education</h3>
+                <div class="edu-block">
+                    <h4>MSc Digital Business &amp; Analytics</h4>
+                    <div class="inst">EMLV, &Eacute;cole de Management L&eacute;onard de Vinci, Paris</div>
+                    <div class="year">2025 &ndash; Present</div>
+                </div>
+                <div class="edu-block">
+                    <h4>Master of Computer Applications (MCA)</h4>
+                    <div class="inst">Amrita Vishwa Vidyapeetham, Amritapuri</div>
+                    <div class="year">2017 &ndash; 2019</div>
+                    <div class="courses">System Security, Software Project Management, Design &amp; Analysis of Algorithms, Computational Theory</div>
+                </div>
+                <div class="edu-block">
+                    <h4>Bachelor of Computer Applications (BCA)</h4>
+                    <div class="inst">Amrita Vishwa Vidyapeetham, Amritapuri</div>
+                    <div class="year">2014 &ndash; 2017</div>
+                    <div class="courses">Data Communication &amp; Networks, Advanced OS (Red Hat Linux), Computer Architecture, Information &amp; Network Security</div>
+                </div>
+
+                <h3 style="margin-top:24px;">Languages</h3>
+                <div class="lang-row">
+                    <p><strong>English:</strong> Professional Proficiency</p>
+                    <p><strong>Malayalam:</strong> Native</p>
+                    <p><strong>French:</strong> A2 (Targeting B1 by end of 2025)</p>
+                </div>
+
+                <h3 style="margin-top:24px;">Key Skills</h3>
+                <div style="margin-top:8px;">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Power BI</span>
+                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag">Log Analysis</span>
+                    <span class="skill-tag">GPU Trace</span>
+                    <span class="skill-tag">WPA</span>
+                    <span class="skill-tag">ARIMA</span>
+                    <span class="skill-tag">Apache Superset</span>
+                    <span class="skill-tag">LangGraph</span>
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">Debugging</span>
+                    <span class="skill-tag">Firebase</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Experience -->
+<section id="experience" class="experience">
+    <div class="container">
+        <div class="section-title fade-in"><h2>Professional Experience</h2></div>
+        <div class="timeline">
+            <div class="timeline-item left fade-in">
+                <div class="timeline-content">
+                    <h3>Associate I, Semiconductor Product Validation</h3>
+                    <h4>UST Global (Client: Intel) | Sep 2023 &ndash; Oct 2024 | Trivandrum</h4>
+                    <ul>
+                        <li>Recognised by UST Global with the USTAR Recognition Award for outstanding contributions in team management, debugging, log analysis, and driver issue resolution, awarded to fewer than 5% of contributors.</li>
+                        <li>Architected an Apache Superset KPI dashboard consolidating root-cause analysis data from three engineering streams, reducing stakeholder reporting cycles by 40% and delivering same-day defect visibility.</li>
+                        <li>Engineered end-to-end Python pipelines for hardware and software log analysis, eliminating manual triage bottlenecks and contributing to a 15% improvement in driver performance.</li>
+                        <li>Maintained 95% on-time delivery across cross-functional milestones by streamlining documentation workflows and aligning team efforts to project deadlines.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item right fade-in">
+                <div class="timeline-content">
+                    <h3>Semiconductor Debug Engineer</h3>
+                    <h4>UST Global (Client: Intel) | Jul 2022 &ndash; Sep 2023 | Bengaluru</h4>
+                    <ul>
+                        <li>Investigated hardware and software failures across multi-layer GPU and display stacks using WPA, ETW, GPU Trace, and Event Viewer, surfacing actionable root causes ahead of milestone deadlines.</li>
+                        <li>Documented findings with structured recommendations before escalation, achieving zero critical defect carry-overs across sprint cycles.</li>
+                        <li>Collaborated with development and QA teams to resolve critical application and media-related issues, improving overall system integrity and release quality.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item left fade-in">
+                <div class="timeline-content">
+                    <h3>Semiconductor Triage Engineer</h3>
+                    <h4>UST Global (Client: Intel) | Mar 2022 &ndash; Jul 2022 | Bengaluru</h4>
+                    <ul>
+                        <li>Diagnosed root causes and recommended immediate troubleshooting steps for semiconductor issues across GPU validation pipelines.</li>
+                        <li>Partnered with development, QA, and support teams to resolve GPU-related problems, reducing issue resolution time.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item right fade-in">
+                <div class="timeline-content">
+                    <h3>Semiconductor Validation Engineer</h3>
+                    <h4>UST Global (Client: Intel) | Sep 2021 &ndash; Mar 2022 | Bengaluru</h4>
+                    <ul>
+                        <li>Designed and executed structured test plans across 10+ GPU and display hardware configurations, establishing quality gates that protected each milestone from unresolved defects.</li>
+                        <li>Utilised specialised debugging tools to identify and resolve display-related issues, improving overall release quality.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item left fade-in">
+                <div class="timeline-content">
+                    <h3>IT Support Engineer</h3>
+                    <h4>M.S. Constructions &amp; Contractors | Aug 2019 &ndash; Jul 2021 | Trivandrum</h4>
+                    <ul>
+                        <li>Delivered end-to-end IT and software support across administrative operations, maintaining near-100% system uptime and ensuring uninterrupted business-critical workflows.</li>
+                        <li>Streamlined IT documentation and software assistance processes, improving workflow efficiency and accessibility for all stakeholders.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Skills -->
+<section id="skills" class="skills">
+    <div class="container">
+        <div class="section-title fade-in"><h2>Technical Skills</h2></div>
+        <div class="skills-container">
+            <div class="skill-category fade-in">
+                <h3><i class="fas fa-code"></i> Programming Languages</h3>
+                <div class="skill-item"><div class="skill-info"><span>Python</span><span>90%</span></div><div class="skill-bar"><div class="skill-progress" data-width="90"></div></div></div>
+                <div class="skill-item"><div class="skill-info"><span>SQL</span><span>82%</span></div><div class="skill-bar"><div class="skill-progress" data-width="82"></div></div></div>
+                <div class="skill-item"><div class="skill-info"><span>C</span><span>75%</span></div><div class="skill-bar"><div class="skill-progress" data-width="75"></div></div></div>
+                <div class="skill-item"><div class="skill-info"><span>C++</span><span>70%</span></div><div class="skill-bar"><div class="skill-progress" data-width="70"></div></div></div>
+            </div>
+            <div class="skill-category fade-in">
+                <h3><i class="fas fa-bug"></i> Debugging &amp; Analysis</h3>
+                <div class="skill-item"><div class="skill-info"><span>Windows Performance Analyser (WPA)</span><span>85%</span></div><div class="skill-bar"><div class="skill-progress" data-width="85"></div></div></div>
+                <div class="skill-item"><div class="skill-info"><span>GPU Trace</span><span>80%</span></div><div class="skill-bar"><div class="skill-progress" data-width="80"></div></div></div>
+                <div class="skill-item"><div class="skill-info"><span>Event Viewer</span><span>75%</span></div><div class="skill-bar"><div class="skill-progress" data-width="75"></div></div></div>
+                <div class="skill-item"><div class="skill-info"><span>ETW Tracing</span><span>78%</span></div><div class="skill-bar"><div class="skill-progress" data-width="78"></div></div></div>
+            </div>
+            <div class="skill-category fade-in">
+                <h3><i class="fas fa-chart-bar"></i> Data &amp; Analytics</h3>
+                <div class="skill-tags-list">
+                    <span class="stag">Power BI</span><span class="stag">Apache Superset</span><span class="stag">Tableau</span>
+                    <span class="stag">Scikit-learn</span><span class="stag">Pandas</span><span class="stag">NumPy</span>
+                    <span class="stag">ARIMA</span><span class="stag">DAX</span><span class="stag">Excel</span>
+                </div>
+            </div>
+            <div class="skill-category fade-in">
+                <h3><i class="fas fa-robot"></i> AI &amp; LLM Systems</h3>
+                <div class="skill-tags-list">
+                    <span class="stag">LangGraph</span><span class="stag">N8N</span><span class="stag">Ollama</span>
+                    <span class="stag">Generative AI</span><span class="stag">Prompt Engineering</span>
+                </div>
+            </div>
+            <div class="skill-category fade-in">
+                <h3><i class="fas fa-server"></i> DevOps &amp; Tools</h3>
+                <div class="skill-tags-list">
+                    <span class="stag">Docker</span><span class="stag">Kubernetes</span><span class="stag">GitHub Actions</span>
+                    <span class="stag">Firebase</span><span class="stag">Linux</span><span class="stag">CI/CD</span>
+                </div>
+            </div>
+            <div class="skill-category fade-in">
+                <h3><i class="fas fa-tools"></i> Platforms</h3>
+                <div class="skill-tags-list">
+                    <span class="stag">VS Code</span><span class="stag">Google Workspace</span><span class="stag">Microsoft Teams</span>
+                    <span class="stag">Databricks</span><span class="stag">Proteus</span><span class="stag">Arduino IDE</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Projects -->
+<section id="projects" class="projects">
+    <div class="container">
+        <div class="section-title fade-in"><h2>Featured Projects</h2></div>
+        <div class="projects-grid">
+
+            <div class="project-card fade-in">
+                <div class="project-image"><i class="fas fa-chart-pie"></i><span class="project-badge">Power BI</span></div>
+                <div class="project-info">
+                    <h3>Retail Sales Performance Dashboard</h3>
+                    <p>Architected a multi-page Power BI dashboard tracking district-level sales performance across 35+ store locations. Engineered DAX measures for Total Sales Variance %, year-over-year comparisons, and Average per Unit metrics, enabling stakeholders to answer key performance questions in under 30 seconds without analyst support. Developed a bubble-chart analysis across 10 product categories mapping price positioning against sales variance, surfacing over- and under-performing segments.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Power BI</span><span class="tech-tag">DAX</span>
+                        <span class="tech-tag">Power Query</span><span class="tech-tag">Data Modelling</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/midhulms/Retail-analysis" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-image"><i class="fas fa-brain"></i><span class="project-badge">Research</span></div>
+                <div class="project-info">
+                    <h3>Enterprise AI Adoption &amp; Productivity Analysis</h3>
+                    <p>Analysed 80 quarters of U.S. labour productivity data (2006&ndash;2025) against enterprise AI adoption rates using OLS linear regression (y&nbsp;=&nbsp;0.7826x&nbsp;&minus;&nbsp;10.772, R&sup2;&nbsp;=&nbsp;0.78). Isolated Q1&nbsp;2020 as a COVID-era statistical outlier and excluded it from modelling. Key finding: despite 70% growth in enterprise AI adoption since 2019, labour productivity has not increased proportionally, pointing to adoption friction, skill gaps, and measurement lag as primary explanations.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span><span class="tech-tag">Pandas</span>
+                        <span class="tech-tag">Scikit-learn</span><span class="tech-tag">OLS Regression</span><span class="tech-tag">Matplotlib</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/midhulms/Enterprise-AI-Adoption-Productivity-Analysis" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-image"><i class="fas fa-chart-line"></i><span class="project-badge">ML</span></div>
+                <div class="project-info">
+                    <h3>Rice Price Prediction Model</h3>
+                    <p>Developed an ARIMA-based crop price forecasting model in Python, achieving 85% prediction accuracy end-to-end from raw data ingestion through model validation. Designed to provide agricultural enterprises with a data-driven view of future commodity prices, enabling more informed procurement and market-planning decisions.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span><span class="tech-tag">ARIMA</span>
+                        <span class="tech-tag">Scikit-learn</span><span class="tech-tag">Pandas</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/midhulms/price-prediction-ML" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-image"><i class="fas fa-shield-alt"></i><span class="project-badge">Security</span></div>
+                <div class="project-info">
+                    <h3>Rudhra: Android Malware Detection Tool</h3>
+                    <p>Engineered an Android malware detection tool leveraging machine learning classification algorithms, achieving a 90% detection success rate. Implemented static code analysis to identify application-level vulnerabilities, delivering a lightweight, on-device security layer that protects end users from malicious applications.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Android</span><span class="tech-tag">Java</span>
+                        <span class="tech-tag">Machine Learning</span><span class="tech-tag">Static Analysis</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/midhulms/Rudhra" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-image"><i class="fas fa-microchip"></i><span class="project-badge">Embedded C</span></div>
+                <div class="project-info">
+                    <h3>Embedded Systems Programming Training</h3>
+                    <p>Completed an intensive embedded systems training programme covering ATmega32 architecture, AVR Assembly, and low-level C/C++ programming. Designed and tested real hardware circuits including LED controllers, RGB drivers, and alarm clocks using Arduino and SPI communication. Delivered 8 graded assignments, all documented and version-controlled on GitHub.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Arduino</span><span class="tech-tag">ATmega32</span>
+                        <span class="tech-tag">C/C++</span><span class="tech-tag">AVR Assembly</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/midhulms/Embedded-Systems-Programming-Training-Course" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-image"><i class="fas fa-memory"></i><span class="project-badge">Proteus</span></div>
+                <div class="project-info">
+                    <h3>Digital Systems &amp; Microcontrollers Training</h3>
+                    <p>Completed advanced embedded systems training focusing on peripheral interfacing and digital communication protocols. Developed a custom C driver for a 16&times;2 LCD, implemented full-duplex USART serial communication at the AVR register level, and built PWM-based LED brightness control using hardware timers. Validated all circuits in Proteus Design Suite prior to physical deployment.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Embedded C</span><span class="tech-tag">USART</span>
+                        <span class="tech-tag">PWM</span><span class="tech-tag">Proteus</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/midhulms/Digital-Systems-and-Microcontrollers-Training" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-image"><i class="fas fa-mobile-alt"></i><span class="project-badge">IEEE Published</span></div>
+                <div class="project-info">
+                    <h3>Mobifarmer: Agricultural Marketplace Platform</h3>
+                    <p>Architected a full-stack Android marketplace connecting farmers directly with local buyers via a proprietary location-matching algorithm, Firebase real-time backend, and an ML-powered crop price prediction model integrated at the point of sale. Published as a peer-reviewed research paper at IEEE ICICICT (January 2019), validating the platform's measurable impact on agricultural market access.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Android</span><span class="tech-tag">Java</span>
+                        <span class="tech-tag">Firebase</span><span class="tech-tag">Machine Learning</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/midhulms/mobifarmer" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
+                        <a href="https://ieeexplore.ieee.org/document/8993386" target="_blank"><i class="fas fa-file-alt"></i> IEEE Paper</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-image"><i class="fas fa-lock"></i><span class="project-badge">C#</span></div>
+                <div class="project-info">
+                    <h3>Asthra: Steganographic Data Protection Tool</h3>
+                    <p>Designed a steganography tool that securely encrypts and embeds confidential data within image files, ensuring data integrity and privacy through robust encryption and decryption workflows. Optimised the core algorithm to reduce encryption and decryption processing time by 30%.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">C#</span><span class="tech-tag">Encryption</span>
+                        <span class="tech-tag">Steganography</span><span class="tech-tag">Data Security</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/midhulms/ASTHRA-C-" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Certifications -->
+<section id="certifications" class="certifications">
+    <div class="container">
+        <div class="section-title fade-in"><h2>Certifications</h2></div>
+        <div class="certifications-grid">
+            <div class="certification-card fade-in">
+                <h3>Leadership Skills for the Future</h3>
+                <p><strong>Issued by:</strong> LinkedIn Learning</p>
+                <p><strong>Skills:</strong> Leadership, People Management, Risk Management</p>
+                <a href="https://drive.google.com/file/d/1VxiLseGTYOKPvu03_SiKmQq-NA1saTq7/view" target="_blank"><i class="fas fa-external-link-alt"></i> View Certificate</a>
+            </div>
+            <div class="certification-card fade-in">
+                <h3>Value the Compute in Chip Design Development</h3>
+                <p><strong>Issued by:</strong> Intel | Sep 2022</p>
+                <p><strong>Skills:</strong> Log Analysis, Debugging Tools &amp; Frameworks</p>
+                <a href="https://drive.google.com/file/d/183BkGzgvia9NgGx5pRkJwgOqtAYA_yDa/view" target="_blank"><i class="fas fa-external-link-alt"></i> View Certificate</a>
+            </div>
+            <div class="certification-card fade-in">
+                <h3>Working with Memory Dumps &amp; Debugging (Sysinternals)</h3>
+                <p><strong>Issued by:</strong> Pluralsight | Sep 2023</p>
+                <p><strong>Skills:</strong> Advanced Debugging, Log Analysis</p>
+                <a href="https://app.pluralsight.com/achievements/share/8acfb97f-72ad-4541-b3f4-6aa85003516b" target="_blank"><i class="fas fa-external-link-alt"></i> View Certificate</a>
+            </div>
+            <div class="certification-card fade-in">
+                <h3>Build a Machine Learning Web App with Streamlit &amp; Python</h3>
+                <p><strong>Issued by:</strong> Coursera | Aug 2020 | ID: SP52ZEDA732P</p>
+                <p><strong>Skills:</strong> Machine Learning, Python, Streamlit</p>
+                <a href="https://www.coursera.org/account/accomplishments/certificate/SP52ZEDA732P" target="_blank"><i class="fas fa-external-link-alt"></i> View Certificate</a>
+            </div>
+            <div class="certification-card fade-in">
+                <h3>Machine Learning</h3>
+                <p><strong>Issued by:</strong> Coursera | Aug 2020 | ID: K3JT2RHZYBWC</p>
+                <p><strong>Skills:</strong> Supervised &amp; Unsupervised Learning</p>
+                <a href="https://www.coursera.org/account/accomplishments/certificate/K3JT2RHZYBWC" target="_blank"><i class="fas fa-external-link-alt"></i> View Certificate</a>
+            </div>
+            <div class="certification-card fade-in">
+                <h3>Support Vector Machines in Python</h3>
+                <p><strong>Issued by:</strong> Coursera | Aug 2020 | ID: CUCNFPHNNGXU</p>
+                <p><strong>Skills:</strong> Machine Learning, Python, SVM</p>
+                <a href="https://www.coursera.org/account/accomplishments/certificate/CUCNFPHNNGXU" target="_blank"><i class="fas fa-external-link-alt"></i> View Certificate</a>
+            </div>
+            <div class="certification-card fade-in">
+                <h3>Machine Learning Intensive Programme</h3>
+                <p><strong>Issued by:</strong> Livewire Trivandrum | Mar 2019 &ndash; Jan 2020</p>
+                <p><strong>Skills:</strong> Machine Learning, Python, Scikit-learn, SVM</p>
+                <a href="https://drive.google.com/file/d/12fhdL9J-WdKs8dsMGsSrn8aXAgzbsRVu/view" target="_blank"><i class="fas fa-external-link-alt"></i> View Certificate</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Publications -->
+<section id="publications" class="publications">
+    <div class="container">
+        <div class="section-title fade-in"><h2>Publications</h2></div>
+        <div class="publication-card fade-in">
+            <h3>An Efficient Agricultural Marketing System for Optimising the Benefits of Farmers</h3>
+            <p><strong>Authors:</strong> S. Krishna, M. S. Midhul, R. R. Pillai</p>
+            <p><strong>Published in:</strong> IEEE ICICICT | January 2019</p>
+            <p style="margin-top:10px;">Contributed to the design of an Android and machine-learning-enabled framework to improve direct market access for smallholder farmers in India. The system reduces reliance on intermediaries and provides farmers with data-driven pricing guidance through an ML-powered crop price prediction model.</p>
+            <a href="https://ieeexplore.ieee.org/document/8993386" target="_blank"><i class="fas fa-external-link-alt"></i> View on IEEE Xplore</a>
+        </div>
+    </div>
+</section>
+
+<!-- Achievements -->
+<section id="achievements" class="achievements">
+    <div class="container">
+        <div class="section-title fade-in"><h2>Achievements &amp; Awards</h2></div>
+        <div class="achievements-grid">
+            <div class="achievement-card fade-in">
+                <h3>USTAR Recognition Award</h3>
+                <p><strong>UST Global</strong> | March 2023</p>
+                <p>Recognised for outstanding contributions in log analysis, driver debugging, triage, and validation. Awarded for expertise utilising Windows Performance Analyser to resolve complex hardware and software issues on Intel GPU programmes. Granted to fewer than 5% of contributors for exceptional impact.</p>
+                <a href="https://drive.google.com/file/d/1f8g3kelgKlTJa-kw-yBVt8wfsEWZCwUq/view" target="_blank"><i class="fas fa-external-link-alt"></i> View Award</a>
+            </div>
+            <div class="achievement-card fade-in">
+                <h3>Trivandrum UST Marathon</h3>
+                <p><strong>UST Global</strong> | October 2024</p>
+                <p>Completed the Trivandrum UST Marathon, demonstrating dedication to personal wellness, endurance, and team camaraderie.</p>
+                <a href="https://drive.google.com/file/d/1c_xM9aEafmBOwshF7WMXho_q2K3wbz4S/view" target="_blank"><i class="fas fa-external-link-alt"></i> View Certificate</a>
+            </div>
+            <div class="achievement-card fade-in">
+                <h3>IEEE Publication</h3>
+                <p><strong>IEEE ICICICT</strong> | January 2019</p>
+                <p>Co-authored a peer-reviewed research paper on agricultural marketing systems, presented at the International Conference on Innovations in Communication, Computing and Instrumentation. Recognised as a contribution to applied machine learning in the agricultural sector.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="contact">
+    <div class="container">
+        <div class="section-title fade-in"><h2>Get In Touch</h2></div>
+        <div class="contact-container">
+            <div class="contact-info slide-left">
+                <h3>Contact Information</h3>
+                <div class="contact-details">
+                    <p><i class="fas fa-phone"></i> (+33) 07 68 27 50 17</p>
+                    <p><i class="fas fa-envelope"></i> midhulmsofficial@gmail.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Paris, France</p>
+                    <p><i class="fab fa-linkedin-in"></i> <a href="https://linkedin.com/in/midhul-m-s" target="_blank">linkedin.com/in/midhul-m-s</a></p>
+                    <p><i class="fab fa-github"></i> <a href="https://github.com/midhulms" target="_blank">github.com/midhulms</a></p>
                 </div>
                 <div class="social-links">
                     <a href="https://linkedin.com/in/midhul-m-s" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                     <a href="https://github.com/midhulms" target="_blank"><i class="fab fa-github"></i></a>
                     <a href="mailto:midhulmsofficial@gmail.com"><i class="fas fa-envelope"></i></a>
                 </div>
-            </div>
-            
-
-
-<div class="circular-image-container">
-  <img src="https://drive.google.com/file/d/1NoMo6Z9KFokQlj7atWhaZWtHSqhI_ekg/view?usp=sharing" alt="Midhul M S">
-</div>
-
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Me</h2>
-            </div>
-            <div class="about-content">
-                <div class="about-text">
-                  
-                    
-                    <h3 style="margin-top: 30px;">Education</h3>
-                    <p><strong>Master of Computer Applications (M.C.A.)</strong><br>
-                    Amrita Vishwa Vidyapeetham, Amritapuri | 2017-2019 </p>
-                    <p><strong>Coursework:</strong> System security, Software Project Management, Design and analysis of Algorithms, Computational Theory</p>
-                    
-                    <p style="margin-top: 15px;"><strong>Bachelor of Computer Applications (B.C.A.)</strong><br>
-                    Amrita Vishwa Vidyapeetham, Amritapuri | 2014-2017 </p>
-                    <p><strong>Coursework:</strong> Data communication and Computer Networks, Advance operating system Red hat Linux, Computer Architecture, information and network security</p>
+                <div class="availability-box">
+                    <p>Actively seeking a <strong>6-month internship starting June 2026</strong> in Data Analytics, Business Intelligence, Data Engineering, or Digital Strategy. Based in Paris; open to opportunities across France and Europe.</p>
                 </div>
-                <div class="about-skills">
-                    <h3>Key Skills</h3>
-                    <div style="margin-top: 20px;">
-                        <span class="skill-tag">System Security</span>
-                        <span class="skill-tag">Log Analysis</span>
-                        <span class="skill-tag">Debugging</span>
-                        <span class="skill-tag">Semiconductor Validation</span>
-                        <span class="skill-tag">Project Management</span>
-                        <span class="skill-tag">Team Collaboration</span>
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">Power BI</span>
-                        <span class="skill-tag">SQL</span>
-                        <span class="skill-tag">WPA</span>
-                        <span class="skill-tag">GPU Trace</span>
-                        <span class="skill-tag">Problem Solving</span>
-                        <span class="skill-tag">Effective Communication</span>
-                    </div>
-                    
-                    <h3 style="margin-top: 30px;">Languages</h3>
-                    <div style="margin-top: 15px;">
-                        <p><strong>English:</strong> Professional Proficiency</p>
-                        <p><strong>Malayalam:</strong> Native</p>
-                        <p><strong>French:</strong> Basic (Currently learning)</p>
-                    </div>
-                </div>
+            </div>
+            <div class="contact-form slide-right">
+                <form id="contactForm">
+                    <div class="form-group"><label for="name">Name</label><input type="text" id="name" name="name" placeholder="Your name" required></div>
+                    <div class="form-group"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="your@email.com" required></div>
+                    <div class="form-group"><label for="subject">Subject</label><input type="text" id="subject" name="subject" placeholder="What is this about?" required></div>
+                    <div class="form-group"><label for="message">Message</label><textarea id="message" name="message" placeholder="Your message..." required></textarea></div>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Experience Section -->
-    <section id="experience" class="experience">
-        <div class="container">
-            <div class="section-title">
-                <h2>Professional Experience</h2>
-            </div>
-            <div class="timeline">
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <h3>Associate I - Semiconductor Product Validation</h3>
-                        <h4>UST (Client-Intel) | Sep 2023 - Oct 2024 | Trivandrum</h4>
-                        <ul>
-                            <li><strong>Award Recognition:</strong> Acknowledged by UST for outstanding contributions in team management, debugging, log analysis, and troubleshooting driver issues.</li>
-                            <li><strong>Project Coordination:</strong> Effectively coordinated team efforts to complete projects within deadlines by optimizing documentation processes.</li>
-                            <li><strong>Log Analysis and Debugging:</strong> Conducted thorough analysis of application and system logs, enhancing driver performance by 15%.</li>
-                            <li><strong>Cross-Functional Collaboration:</strong> Partnered with multiple teams to resolve complex issues, achieving a 95% success rate in project delivery.</li>
-                          <li><strong>Developing a dashboard app using Apache Superset for root cause analysis.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item right">
-                    <div class="timeline-content">
-                        <h3>Semiconductor Debug Engineer</h3>
-                        <h4>UST (Client-Intel) | Jul 2022 - Sep 2023 | Bengaluru</h4>
-                        <ul>
-                            <li><strong>Debugging:</strong> Conducted comprehensive root cause analysis and recommended security enhancements to improve system integrity.</li>
-                            <li><strong>Team Management:</strong> Collaborated with cross-functional teams to resolve critical application and media-related issues.</li>
-                            <li><strong>Debugging Tools:</strong> Utilized advanced tools (WPT, ETW, GPU Trace, Event Viewer) to diagnose and resolve hardware/software issues.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <h3>Semiconductor Triage Engineer</h3>
-                        <h4>UST (Client-Intel) | Mar 2022 - Jul 2022 | Bengaluru</h4>
-                        <ul>
-                            <li><strong>Troubleshooting:</strong> Diagnosed root causes and recommended immediate troubleshooting steps for semiconductor issues.</li>
-                            <li><strong>Collaboration:</strong> Partnered with development, QA, and support teams to swiftly resolve GPU-related problems.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item right">
-                    <div class="timeline-content">
-                        <h3>Semiconductor Validation Engineer</h3>
-                        <h4>UST (Client-Intel) | Sep 2021 - Mar 2022 | Bengaluru</h4>
-                        <ul>
-                            <li><strong>Test Planning:</strong> Designed and executed comprehensive test plans to evaluate display performance.</li>
-                            <li><strong>Performance Analysis:</strong> Utilized specialized tools to identify and resolve display-related issues.</li>
-                        </ul>
-                    </div>
-                </div>
-                 <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <h3>IT Support Engineer</h3>
-                        <h4>M.S Constructions& Contractors | Aug 2019 - July 2021 | Trivandrum</h4>
-                        <ul>
-                            <li><strong>Technical Support& Collaboration:</strong> Delivered timely and effective technical support to employees,facilitating smooth daily operations and enabling a productive work environmen.</li>
-                            <li><strong>Software Assistance:</strong> Managed IT documentation, ensuring accuracy and accessibility for stakeholders, there by improving workflow efficiency.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="footer-links">
+            <a href="#about">About</a><a href="#experience">Experience</a>
+            <a href="#projects">Projects</a><a href="#certifications">Certifications</a><a href="#contact">Contact</a>
         </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <div class="section-title">
-                <h2>Technical Skills</h2>
-            </div>
-            <div class="skills-container">
-                <div class="skill-category">
-                    <h3>Programming Languages</h3>
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <span>Python</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 90%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <span>C</span>
-                            <span>75%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 75%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <span>C++</span>
-                            <span>70%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 70%;"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="skill-category">
-                    <h3>Debugging & Analysis</h3>
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <span>Windows Performance Analyzer (WPA)</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 85%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <span>GPU Trace</span>
-                            <span>80%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 80%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <span>Event Viewer</span>
-                            <span>75%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 75%;"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="skill-category">
-                    <h3>Tools & Technologies</h3>
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <span>Linux</span>
-                            <span>80%</span>
-                        </div>
-                        <div class="skill-info">
-                            <span>Google Workspace</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="skill-info">
-                            <span>Microsoft Teams</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="skill-info">
-                            <span>Excel</span>
-                            <span>85%</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="social-links" style="justify-content:center; margin-bottom:18px;">
+            <a href="https://linkedin.com/in/midhul-m-s" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://github.com/midhulms" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="mailto:midhulmsofficial@gmail.com"><i class="fas fa-envelope"></i></a>
         </div>
-    </section>
+        <p class="copyright">&copy; 2025 Midhul M S. All rights reserved.</p>
+    </div>
+</footer>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <div class="section-title">
-                <h2>Featured Projects</h2>
-            </div>
-            <div class="projects-grid">
-<div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="project-info">
-                        <h3>Rice Price Prediction Model (Python)</h3>
-                        <p>Built a predictive model using ARIMA to forecast rice prices in Kerala, achieving 85% accuracy. Provided actionable insights for farmers' market planning.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">ARIMA</span>
-                            <span class="tech-tag">Machine Learning</span>
-                            <span class="tech-tag">Data Analysis</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/midhulms/price-prediction-ML" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
-                        </div>
-                    </div>
-                </div>
-                 <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="project-info">
-                        <h3> Retail Analysis Sales Dashboard</h3>
-                        <p>This Power BI dashboard provides a clear view of district-level sales performance. It helps track monthly trends, compare year-over-year results, and analyze product category performance across stores and managers.
-The report is designed for sales teams and business stakeholders who need quick, reliable insights to support decisions.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Power BI</span>
-                            <span class="tech-tag">DAX</span>
-                            <span class="tech-tag">SQL</span>
-                            <span class="tech-tag">Excel</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/midhulms/Retail-analysis.git"></i> View on GitHub</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <div class="project-info">
-                        <h3>Rudhra (Android Security Tool)</h3>
-                        <p>Developed an all-in-one security tool for Android, implementing static code analysis to identify vulnerabilities and protect devices from malware. Achieved a 90% detection rate for malicious applications.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Android</span>
-                            <span class="tech-tag">Security</span>
-                            <span class="tech-tag">Static Analysis</span>
-                        </div>
-                    </div>
-                </div>
+<!-- Back to Top -->
+<button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
 
-  <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="project-info">
-                        <h3> Embedded Systems Programming Training Course  </h3>
-                        <p>Completed an intensive embedded systems training program covering ATmega32 architecture, 
-                            AVR Assembly, and low-level C/C++ programming. Built and tested real hardware circuits
-                            including LED controllers, RGB drivers, and alarm clocks using Arduino and SPI communication.
-                            Delivered 8 graded assignments documented and version-controlled on GitHub.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Arduino</span>
-                            <span class="tech-tag">ATmega32</span>
-                            <span class="tech-tag">C/C++</span>
-                            <span class="tech-tag">Assembly</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/midhulms/Embedded-Systems-Programming-Training-Course"></i> View on GitHub</a>
-                        </div>
-                    </div>
-                </div>
+<script>
+/* ── Particle Background ── */
+(function() {
+    var c = document.getElementById('particles-canvas');
+    var ctx = c.getContext('2d');
+    var pts = [];
+    var count = 50;
+    function resize() { c.width = window.innerWidth; c.height = window.innerHeight; }
+    resize();
+    window.addEventListener('resize', resize);
 
+    function P() {
+        this.x = Math.random() * c.width;
+        this.y = Math.random() * c.height;
+        this.vx = (Math.random() - 0.5) * 0.35;
+        this.vy = (Math.random() - 0.5) * 0.35;
+        this.r = Math.random() * 1.8 + 0.5;
+        this.o = Math.random() * 0.35 + 0.1;
+    }
+    for (var i = 0; i < count; i++) pts.push(new P());
 
-                 <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="project-info">
-                        <h3>Digital Systems & Microcontrollers Training</h3>
-         <p>
-Completed advanced embedded systems training through UST Global's professional development programme,
-             focusing on peripheral interfacing and digital communication protocols.
-             Built a custom C driver for a 16x2 LCD, implemented full-duplex USART serial communication at the AVR register level, 
-             and developed PWM-based LED brightness control using hardware timers. 
-             Coordinated multi-peripheral systems combining motor control with live LCD feedback,
-             and developed a reusable keypad scanning library with debounce logic. 
-             All circuits were simulated in Proteus Design Suite before physical deployment on real hardware. 
-             Tools used: Embedded C, AVR-GCC, Proteus 8, AVR Studio, and Linux.
-</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Embedded C</span>
-                            <span class="tech-tag">AVR Microcontroller</span>
-                            <span class="tech-tag">Proteus Simulation</span>
-                            <span class="tech-tag">USART</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/midhulms/Digital-Systems-and-Microcontrollers-Training"></i> View on GitHub</a>
-                        </div>
-                    </div>
-                </div>
-
-                
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-lock"></i>
-                    </div>
-                    <div class="project-info">
-                        <h3>Asthra (C# Data Hiding Tool)</h3>
-                        <p>Designed a data-hiding tool capable of securely encrypting confidential information within images, ensuring data integrity and privacy. Streamlined processes, reducing encryption/decryption time by 30%.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">C#</span>
-                            <span class="tech-tag">Encryption</span>
-                            <span class="tech-tag">Data Security</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <div class="project-info">
-                        <h3>Mobilfarmer (Android Application)</h3>
-                        <p>Developed a marketing platform connecting farmers directly with customers, increasing user engagement by 30%. Implemented machine learning models for accurate predictions.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Android</span>
-                            <span class="tech-tag">Java</span>
-                            <span class="tech-tag">Machine Learning</span>
-                            <span class="tech-tag">Firebase</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/midhulms/mobilfarmer" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Certifications Section -->
-    <section id="certifications" class="certifications">
-        <div class="container">
-            <div class="section-title">
-                <h2>Certifications</h2>
-            </div>
-            <div class="certifications-grid">
-                <div class="certification-card">
-                    <h3>Leadership Skills for The Future</h3>
-                    <p><strong>Issued by:</strong> LinkedIn Learning</p>
-                    <p><strong>Skills:</strong> Leadership, People Management, Teamwork, Risk Management</p>
-
-<a href="https://drive.google.com/file/d/1VxiLseGTYOKPvu03_SiKmQq-NA1saTq7/view?pli=1" target="_blank"><i class="fas fa-external-link-alt"></i> View Certificate</a>
-                </div>
-                
-                <div class="certification-card">
-                    <h3>Value The Compute In Chip Design Development</h3> 
-                    <p><strong>Issued by:</strong> Intel</p>
-                    <p><strong>Date:</strong> Sep 2022</p>
-                    <p><strong>Skills:</strong> Log analysis, Debugging tools and framework</p>
-<a href="https://drive.google.com/file/d/183BkGzgvia9NgGx5pRkJwgOqtAYA_yDa/view"target="_blank"><i class="fas fa-external-link-alt"></i> View Certificate</a>
-                </div>
-                
-                <div class="certification-card">
-                    <h3>Working with Memory Dumps and Debugging Using Sysinternals Tools</h3>
-                    <p><strong>Issued by:</strong> Pluralsight</p>
-                    <p><strong>Date:</strong> Sep 2023</p>
-                    <p><strong>Skills:</strong> Debugging, Log analysis</p>
-
-<a href="https://app.pluralsight.com/achievements/share/8acfb97f-72ad-4541-b3f4-6aa85003516b" target="_blank"><i class="fas fa-external-link-alt"></i> View Certificate</a>
-
-                </div>
-
-<div class="certification-card">
-                    <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Coursera-Logo_600x600.svg/1200px-Coursera-Logo_600x600.svg.png" alt="Coursera" style="height: 30px; margin-right: 10px;">
-                        <h3>Build a Machine Learning Web App with Streamlit and Python</h3>
-                    </div>
-                    <p><strong>Issued by:</strong> Coursera</p>
-                    <p><strong>Date:</strong> Aug 2020</p>
-                    <p><strong>Credential ID:</strong> SP52ZEDA732P</p>
-                    <p><strong>Skills:</strong> Machine Learning, Python, Streamlit, Project Management</p>
-                    <a href="https://www.coursera.org/account/accomplishments/certificate/SP52ZEDA732P" target="_blank"><i class="fas fa-external-link-alt"></i> Show Credential</a>
-                </div>
-
-                <div class="certification-card">
-                    <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Coursera-Logo_600x600.svg/1200px-Coursera-Logo_600x600.svg.png" alt="Coursera" style="height: 30px; margin-right: 10px;">
-                        <h3>Machine Learning</h3>
-                    </div>
-                    <p><strong>Issued by:</strong> Coursera</p>
-                    <p><strong>Date:</strong> Aug 2020</p>
-                    <p><strong>Credential ID:</strong> K3JT2RHZYBWC</p>
-                    <p><strong>Skills:</strong> Machine Learning, Project Management</p>
-                    <a href="https://www.coursera.org/account/accomplishments/certificate/K3JT2RHZYBWC" target="_blank"><i class="fas fa-external-link-alt"></i> Show Credential</a>
-                </div>
-
-                <div class="certification-card">
-                    <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Coursera-Logo_600x600.svg/1200px-Coursera-Logo_600x600.svg.png" alt="Coursera" style="height: 30px; margin-right: 10px;">
-                        <h3>Support Vector Machines in Python, From Start to Finish</h3>
-                    </div>
-                    <p><strong>Issued by:</strong> Coursera</p>
-                    <p><strong>Date:</strong> Aug 2020</p>
-                    <p><strong>Credential ID:</strong> CUCNFPHNNGXU</p>
-                    <p><strong>Skills:</strong> Machine Learning, Python, SVM, Project Management</p>
-                    <a href="https://www.coursera.org/account/accomplishments/certificate/CUCNFPHNNGXU" target="_blank"><i class="fas fa-external-link-alt"></i> Show Credential</a>
-                </div>
-
-                <div class="certification-card">
-                    <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                        <img src="https://livewirejammu.com/assets/images/livelogo.png" alt="Livewire" style="height: 30px; margin-right: 10px;">
-                        <h3>Machine Learning</h3>
-                    </div>
-                    <p><strong>Issued by:</strong> LIVEWIRE TRIVANDRUM</p>
-                    <p><strong>Date:</strong> Mar 2019 - Jan 2020</p>
-                    <p><strong>Skills:</strong> Machine Learning, Python, SVM, Scikit-learn</p>
-                    <a href="https://drive.google.com/file/d/12fhdL9J-WdKs8dsMGsSrn8aXAgzbsRVu/view" target="_blank"><i class="fas fa-external-link-alt"></i> Show Credential</a>
-                </div>
-            </div>
-        </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Publications Section -->
-    <section id="publications" class="publications">
-        <div class="container">
-            <div class="section-title">
-                <h2>Publications</h2>
-            </div>
-            <div class="publication-card">
-                <h3>An efficient agricultural marketing system for optimizing the benefits of farmers</h3>
-                <p><strong>Authors:</strong> S. Krishna, M. S. Midhul, R. R. Pillai</p>
-                <p><strong>Published in:</strong> IEEE ICICICT</p>
-                <p><strong>Date:</strong> January 2019</p>
-                <p><strong>Impact:</strong> Contributed to a recognized framework aimed at improving farmers' market access, receiving positive feedback from industry experts.</p>
-                <a href="https://ieeexplore.ieee.org/document/8993386" target="_blank"><i class="fas fa-external-link-alt"></i> View Publication</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Achievements Section -->
-    <section id="achievements" class="achievements">
-        <div class="container">
-            <div class="section-title">
-                <h2>Achievements & Awards</h2>
-            </div>
-            <div class="achievements-grid">
-                <div class="achievement-card">
-                    <h3>USTAR Recognition</h3>
-                    <p><strong>Issued by:</strong> UST</p>
-                    <p><strong>Date:</strong> March 2023</p>
-                    <p>Honored for significant contributions in log analysis, driver debugging, triage, and validation. Recognized expertise in using Windows Performance Analyzer (WPA) to resolve complex hardware/software issues.</p>
-                    <a href="https://drive.google.com/file/d/1f8g3kelgKlTJa-kw-yBVt8wfsEWZCwUq/view" target="_blank"><i class="fas fa-external-link-alt"></i> View Award</a>
-                </div>
-                
-                <div class="achievement-card">
-                    <h3>Trivandrum UST Marathon</h3>
-                    <p><strong>Issued by:</strong> UST</p>
-                    <p><strong>Date:</strong> October 2024</p>
-                    <a href="https://drive.google.com/file/d/1c_xM9aEafmBOwshF7WMXho_q2K3wbz4S/view" target="_blank"><i class="fas fa-external-link-alt"></i> View Certificate</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-title">
-                <h2>Get In Touch</h2>
-            </div>
-            <div class="contact-container">
-                <div class="contact-info">
-                    <h3>Contact Information</h3>
-                    <div class="contact-details">
-                        <p><i class="fas fa-phone"></i>(+33)0768275017</p>
-                        <p><i class="fas fa-envelope"></i> midhulmsofficial@gmail.com</p>
-                        <p><i class="fas fa-map-marker-alt"></i> Paris,France</p>
-                    </div>
-                    <div class="social-links">
-                        <a href="https://linkedin.com/in/midhul-m-s" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="https://github.com/midhulms" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="mailto:midhulms@gmail.com"><i class="fas fa-envelope"></i></a>
-                    </div>
-                </div>
-                <div class="contact-form">
-                    <form>
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" required></textarea>
-                        </div>
-                        <button type="submit" class="btn">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-links">
-                    <a href="#about">About</a>
-                    <a href="#experience">Experience</a>
-                    <a href="#projects">Projects</a>
-                    <a href="#contact">Contact</a>
-                </div>
-                <div class="social-links">
-                    <a href="https://linkedin.com/in/midhul-m-s" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://github.com/midhulms" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="mailto:midhulmsofficial@gmail.com"><i class="fas fa-envelope"></i></a>
-                </div>
-                <p class="copyright">© 2024 Midhul M S. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-        
-        // Form submission handling
-        const form = document.querySelector('form');
-        if (form) {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert('Thank you for your message! I will get back to you soon.');
-                form.reset();
-            });
+    function draw() {
+        ctx.clearRect(0, 0, c.width, c.height);
+        for (var i = 0; i < pts.length; i++) {
+            var p = pts[i];
+            p.x += p.vx; p.y += p.vy;
+            if (p.x < 0 || p.x > c.width) p.vx *= -1;
+            if (p.y < 0 || p.y > c.height) p.vy *= -1;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(59,130,246,' + p.o + ')';
+            ctx.fill();
+            for (var j = i + 1; j < pts.length; j++) {
+                var q = pts[j];
+                var dx = p.x - q.x, dy = p.y - q.y;
+                var d = Math.sqrt(dx*dx + dy*dy);
+                if (d < 130) {
+                    ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y);
+                    ctx.strokeStyle = 'rgba(37,99,235,' + (0.1*(1-d/130)) + ')';
+                    ctx.lineWidth = 0.5; ctx.stroke();
+                }
+            }
         }
-    </script>
+        requestAnimationFrame(draw);
+    }
+    draw();
+})();
+
+/* ── Typing Effect ── */
+(function() {
+    var phrases = [
+        'Currently pursuing MSc in Business Analytics @ EMLV Paris',
+        'Business Analytics & Data Professional',
+        'Semiconductor Validation Engineer',
+        'Python Developer & ML Practitioner'
+    ];
+    var el = document.getElementById('typed-text');
+    var pi = 0, ci = 0, deleting = false, speed = 55;
+
+    function type() {
+        var phrase = phrases[pi];
+        if (deleting) {
+            el.textContent = phrase.substring(0, ci - 1);
+            ci--;
+            speed = 25;
+        } else {
+            el.textContent = phrase.substring(0, ci + 1);
+            ci++;
+            speed = 55;
+        }
+        if (!deleting && ci === phrase.length) { speed = 2200; deleting = true; }
+        else if (deleting && ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; speed = 350; }
+        setTimeout(type, speed);
+    }
+    setTimeout(type, 700);
+})();
+
+/* ── Scroll Progress ── */
+window.addEventListener('scroll', function() {
+    var st = document.documentElement.scrollTop || document.body.scrollTop;
+    var sh = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    document.getElementById('scrollProgress').style.width = (st / sh * 100) + '%';
+});
+
+/* ── Back to Top ── */
+window.addEventListener('scroll', function() {
+    document.getElementById('backToTop').classList.toggle('show', window.scrollY > 400);
+});
+document.getElementById('backToTop').addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+/* ── Mobile Nav ── */
+(function() {
+    var h = document.getElementById('hamburger');
+    var m = document.getElementById('mobileNav');
+    h.addEventListener('click', function() {
+        h.classList.toggle('active');
+        m.classList.toggle('open');
+    });
+    m.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+            h.classList.remove('active');
+            m.classList.remove('open');
+        });
+    });
+})();
+
+/* ── Scroll Reveal ── */
+(function() {
+    var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+            if (e.isIntersecting) {
+                e.target.classList.add('visible');
+                var bars = e.target.querySelectorAll('.skill-progress');
+                if (bars.length) {
+                    bars.forEach(function(b) { b.style.width = b.dataset.width + '%'; });
+                }
+            }
+        });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+    document.querySelectorAll('.fade-in,.slide-left,.slide-right,.skill-category').forEach(function(el) {
+        obs.observe(el);
+    });
+})();
+
+/* ── Counter Animation ── */
+(function() {
+    function count(el, target) {
+        var v = 0, step = Math.ceil(target / 70);
+        var t = setInterval(function() {
+            v += step;
+            if (v >= target) { el.textContent = target + '+'; clearInterval(t); }
+            else { el.textContent = v + '+'; }
+        }, 25);
+    }
+    var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+            if (e.isIntersecting) {
+                document.querySelectorAll('[data-target]').forEach(function(el) {
+                    count(el, parseInt(el.dataset.target));
+                });
+                obs.disconnect();
+            }
+        });
+    }, { threshold: 0.3 });
+    var s = document.querySelector('.hero-stats');
+    if (s) obs.observe(s);
+})();
+
+/* ── Smooth Scroll ── */
+document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+        e.preventDefault();
+        var t = document.querySelector(a.getAttribute('href'));
+        if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+});
+
+/* ── Form Submit ── */
+var form = document.getElementById('contactForm');
+if (form) {
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Thank you for your message! I will get back to you soon.');
+        form.reset();
+    });
+}
+</script>
 </body>
 </html>

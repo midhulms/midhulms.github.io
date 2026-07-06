@@ -130,6 +130,10 @@
             background: linear-gradient(90deg, var(--primary), var(--accent));
             bottom: -10px; left: 25%; border-radius: 3px;
         }
+        .section-subtitle {
+            text-align: center; max-width: 640px; margin: -40px auto 50px;
+            color: var(--text); opacity: 0.75; font-size: 0.95rem;
+        }
 
         /* ── Scroll Reveals ── */
         .fade-in {
@@ -407,24 +411,55 @@
             transform: translateY(-2px);
         }
 
+        /* ── Impact chart (3D) ── */
+        .impact-chart-wrap {
+            background-color: var(--card-bg); border-radius: 14px;
+            padding: 10px 10px 0; margin-top: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+        }
+        .impact-chart-header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 16px 20px 0;
+        }
+        .impact-chart-header h3 { color: white; font-size: 1.1rem; }
+        .impact-chart-header span {
+            font-size: 0.75rem; color: var(--text); opacity: 0.6;
+        }
+        #impact-chart-canvas { width: 100%; height: 380px; display: block; cursor: grab; }
+        #impact-chart-canvas:active { cursor: grabbing; }
+        .impact-legend {
+            display: flex; flex-wrap: wrap; gap: 18px; justify-content: center;
+            padding: 6px 20px 18px; font-size: 0.78rem; color: var(--text); opacity: 0.85;
+        }
+        .impact-legend span { display: inline-flex; align-items: center; gap: 6px; }
+        .impact-legend i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+
         /* ── Projects ── */
         .projects { background: linear-gradient(180deg, #060f1e, var(--background)); }
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 30px;
+            perspective: 1200px;
         }
         .project-card {
             background-color: var(--card-bg); border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            transition: all 0.35s; display: flex; flex-direction: column;
+            transition: transform 0.15s ease-out, box-shadow 0.35s, border-color 0.35s;
+            display: flex; flex-direction: column;
             border: 1px solid transparent;
+            transform-style: preserve-3d;
+            will-change: transform;
         }
         .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 22px 45px rgba(0, 0, 0, 0.35);
             border-color: rgba(37, 99, 235, 0.3);
+        }
+        .project-card .project-image i,
+        .project-card .project-badge {
+            transform: translateZ(28px);
         }
         .project-image {
             height: 180px; background-color: var(--light-gray);
@@ -463,7 +498,7 @@
             color: var(--accent); padding: 4px 12px;
             border-radius: 5px; font-size: 0.78rem; font-weight: 500;
         }
-        .project-links { display: flex; gap: 15px; }
+        .project-links { display: flex; gap: 15px; flex-wrap: wrap; }
         .project-links a {
             text-decoration: none; color: var(--accent);
             font-weight: 600; font-size: 0.85rem;
@@ -471,6 +506,34 @@
             transition: all 0.3s;
         }
         .project-links a:hover { color: white; transform: translateX(3px); }
+
+        /* ── Featured project (with video) ── */
+        .featured-project {
+            background-color: var(--card-bg); border-radius: 14px;
+            overflow: hidden; margin-bottom: 40px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            border: 1px solid rgba(37, 99, 235, 0.35);
+            display: grid; grid-template-columns: 1.1fr 1fr;
+        }
+        .featured-video { position: relative; background: #000; min-height: 320px; }
+        .featured-video iframe { width: 100%; height: 100%; min-height: 320px; border: 0; display: block; }
+        .featured-body { padding: 34px; display: flex; flex-direction: column; }
+        .featured-eyebrow {
+            display: inline-flex; align-items: center; gap: 8px; width: fit-content;
+            background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35);
+            color: var(--green); font-size: 0.72rem; font-weight: 700;
+            letter-spacing: 0.06em; text-transform: uppercase;
+            padding: 5px 12px; border-radius: 20px; margin-bottom: 16px;
+        }
+        .featured-body h3 { color: white; font-size: 1.5rem; margin-bottom: 12px; }
+        .featured-body p { font-size: 0.92rem; line-height: 1.75; margin-bottom: 14px; opacity: 0.92; }
+        .featured-stats { display: flex; gap: 24px; margin: 8px 0 20px; flex-wrap: wrap; }
+        .featured-stats .fstat { text-align: left; }
+        .featured-stats .fstat b { display: block; color: var(--accent); font-size: 1.3rem; }
+        .featured-stats .fstat span { font-size: 0.72rem; opacity: 0.65; text-transform: uppercase; letter-spacing: 0.04em; }
+        @media (max-width: 900px) {
+            .featured-project { grid-template-columns: 1fr; }
+        }
 
         /* ── Certifications ── */
         .certifications { background: var(--background); }
@@ -499,6 +562,10 @@
             margin-top: 12px; transition: color 0.3s; font-size: 0.85rem;
         }
         .certification-card a:hover { color: white; }
+        .certification-card.featured-cert {
+            border-color: rgba(16, 185, 129, 0.4);
+            background: linear-gradient(135deg, rgba(16,185,129,0.08), var(--card-bg) 60%);
+        }
 
         /* ── Publications ── */
         .publications { background: #060f1e; }
@@ -702,8 +769,8 @@
             <div class="hero-badge fade-in"><span class="dot"></span> Open to Internship, June 2026</div>
             <h1 class="fade-in">Hi, I'm <span class="name">Midhul M S</span></h1>
             <div class="tagline fade-in"><span id="typed-text"></span><span class="cursor"></span></div>
-            <p class="fade-in">IT Professional with 5+ years of experience in the IT industry. For three years, I worked in semiconductor validation, game testing, automation, and debugging for Intel chips and drivers like Tiger Lake, Skylake, and Alder Lake.</p>
-            <p class="fade-in">Recognised with the USTAR Recognition Award for managing Tiger Lake, Discrete Graphics DG1 and DG2 production driver release and delivery.</p>
+            <p class="fade-in">IT professional with 5+ years across semiconductor validation, data analytics, and business intelligence. Three of those years were spent debugging and validating Intel GPU drivers, Tiger Lake, Alder Lake, and DG1/DG2, before moving into Power BI, Python, and applied ML for business decisions.</p>
+            <p class="fade-in">USTAR Recognition Award winner, UST Global, for managing the Tiger Lake and DG1/DG2 production driver release and delivery.</p>
             <div class="hero-motto fade-in">"Stay Curious. Keep Learning."</div>
             <div class="hero-btns fade-in">
                 <a href="#contact" class="btn">Get In Touch</a>
@@ -717,7 +784,7 @@
             <div class="hero-stats fade-in">
                 <div class="stat"><div class="stat-num" data-target="5">0</div><div class="stat-label">Years Experience</div></div>
                 <div class="stat"><div class="stat-num" data-target="85">0</div><div class="stat-label">Model Accuracy %</div></div>
-                <div class="stat"><div class="stat-num" data-target="8">0</div><div class="stat-label">Projects Delivered</div></div>
+                <div class="stat"><div class="stat-num" data-target="9">0</div><div class="stat-label">Projects Delivered</div></div>
                 <div class="stat"><div class="stat-num" data-target="95">0</div><div class="stat-label">On-Time Delivery %</div></div>
             </div>
         </div>
@@ -731,17 +798,17 @@
         <div class="section-title fade-in"><h2>About Me</h2></div>
         <div class="about-content">
             <div class="about-text slide-left">
-                
-                <p>Currently studying an MSc in Digital Business &amp; Analytics at &Eacute;cole de Management L&eacute;onard de Vinci in Paris. I work on forecasting models, Power BI dashboards, and experimenting with LLM-powered workflows (LangGraph, N8N). I enjoy traveling, discovering new cultures, and learning languages. I have a DELF A2 level certification in French (conversational A2) and communicate well in English, and thrive in international environments.</p>
-<p>During my master's studies, I work with <strong>Python, SQL</strong>, and tools like <strong>AI, Power BI, Excel, and Tableau</strong>.</p>
-                <p>I am also expert in WinDbg, Windows Performance Analyzer, Xperf, GPUView log analysis, and code-level debugging in Intel drivers for graphics (DG1, DG2) and standard platforms.</p>
-                <p>I'm looking for a <strong>6-month internship from June 2026</strong>.</p>
+
+                <p>I'm currently studying for an MSc in Digital Business &amp; Analytics at &Eacute;cole de Management L&eacute;onard de Vinci in Paris, working on forecasting models, Power BI dashboards, and agentic AI workflows built with LangGraph and n8n. Outside of work, I like traveling, picking up new languages, and I hold a DELF A2 certificate in French.</p>
+                <p>During my master's, I use <strong>Python, SQL</strong>, and tools like <strong>Power BI, Excel, and Tableau</strong> day to day.</p>
+                <p>Before the move into analytics, I spent three years debugging Intel graphics drivers, WinDbg, Windows Performance Analyzer, Xperf, GPUView log analysis, and code-level debugging on DG1 and DG2 platforms.</p>
+                <p>I'm looking for a <strong>6-month internship starting June 2026</strong>.</p>
 
                 <div class="award-highlight fade-in">
                     <div class="icon">&#127942;</div>
                     <div>
                         <strong>USTAR Recognition Award</strong>
-                        <p>UST Global, March 2023. Recognised for outstanding impact in semiconductor debugging, log analysis, and cross-team coordination on Intel GPU validation and debugging programmes.</p>
+                        <p>UST Global, March 2023. Recognised for impact in semiconductor debugging, log analysis, and cross-team coordination on Intel GPU validation programmes.</p>
                     </div>
                 </div>
             </div>
@@ -871,7 +938,7 @@
                 <div class="skill-item"><div class="skill-info"><span>Pandas</span><span>80%</span></div><div class="skill-bar"><div class="skill-progress" data-width="80"></div></div></div>
                 <div class="skill-item"><div class="skill-info"><span>Scikit-Learn</span><span>75%</span></div><div class="skill-bar"><div class="skill-progress" data-width="75"></div></div></div>
                 <div class="skill-item"><div class="skill-info"><span>Numpy</span><span>78%</span></div><div class="skill-bar"><div class="skill-progress" data-width="78"></div></div></div>
-              
+
             </div>
             <div class="skill-category fade-in">
                 <h3><i class="fas fa-bug"></i> Debugging &amp; Analysis</h3>
@@ -883,7 +950,7 @@
                 <div class="skill-item"><div class="skill-info"><span>Data Cleaning</span><span>80%</span></div><div class="skill-bar"><div class="skill-progress" data-width="80"></div></div></div>
                 <div class="skill-item"><div class="skill-info"><span>Dashboard Automation</span><span>75%</span></div><div class="skill-bar"><div class="skill-progress" data-width="75"></div></div></div>
                 <div class="skill-item"><div class="skill-info"><span>Data Visualization</span><span>78%</span></div><div class="skill-bar"><div class="skill-progress" data-width="78"></div></div></div>
-                
+
             </div>
             <div class="skill-category fade-in">
                 <h3><i class="fas fa-chart-bar"></i> Data &amp; Analytics</h3>
@@ -891,11 +958,8 @@
                     <span class="stag">Power BI</span><span class="stag">Apache Superset</span><span class="stag">Tableau</span>
                     <span class="stag">Scikit-learn</span><span class="stag">Pandas</span><span class="stag">NumPy</span>
                     <span class="stag">ARIMA</span><span class="stag">DAX</span><span class="stag">Excel</span>
-                    <span class="stag">ARIMA</span><span class="stag">Git</span><span class="stag">Jira</span>
+                    <span class="stag">Databricks</span><span class="stag">Git</span><span class="stag">Jira</span>
                 </div>
-            </div>
-
-            </div>
             </div>
             <div class="skill-category fade-in">
                 <h3><i class="fas fa-tools"></i> Platforms</h3>
@@ -905,6 +969,15 @@
                 </div>
             </div>
         </div>
+
+        <div class="impact-chart-wrap fade-in">
+            <div class="impact-chart-header">
+                <h3>Measured Impact Across Projects</h3>
+                <span>drag to rotate</span>
+            </div>
+            <canvas id="impact-chart-canvas"></canvas>
+            <div class="impact-legend" id="impact-legend"></div>
+        </div>
     </div>
 </section>
 
@@ -912,16 +985,45 @@
 <section id="projects" class="projects">
     <div class="container">
         <div class="section-title fade-in"><h2>Featured Projects</h2></div>
+
+        <!-- Featured project with video -->
+        <div class="featured-project fade-in">
+            <div class="featured-video">
+                <iframe src="https://drive.google.com/file/d/1x6XXZXymMK7qC4FqCqG54xcylGgKRx8F/preview" allow="autoplay" allowfullscreen></iframe>
+            </div>
+            <div class="featured-body">
+                <div class="featured-eyebrow"><i class="fas fa-star"></i> Flagship Project</div>
+                <h3>Agentic Cost Analyzer</h3>
+                <p>A routing layer that sits in front of an LLM call and decides, per prompt, whether it needs a frontier model or whether a cheaper model does the same job. Every routing decision, token count, and dollar amount is logged and shown back on a live dashboard, not estimated after the fact.</p>
+                <p>Scores prompt complexity from structural signals (length, code fences, planning language), routes to one of six agent personas, and dispatches a real call through OpenAI, Anthropic, or Hugging Face's free inference tier. Costs are tracked per account with Prometheus/Grafana metrics underneath.</p>
+                <div class="featured-stats">
+                    <div class="fstat"><b>6</b><span>Agent Personas</span></div>
+                    <div class="fstat"><b>21</b><span>Automated Tests</span></div>
+                    <div class="fstat"><b>3</b><span>LLM Providers Wired In</span></div>
+                </div>
+                <div class="project-tech">
+                    <span class="tech-tag">FastAPI</span><span class="tech-tag">SQLite</span>
+                    <span class="tech-tag">Streamlit</span><span class="tech-tag">Prometheus</span>
+                    <span class="tech-tag">Grafana</span><span class="tech-tag">tiktoken</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/midhulms/Agentic-cost-Analyzer" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
+                    <a href="https://agentic-cost-analyzer-ld6uxpsuecoytdpat7grg3.streamlit.app/" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                    <a href="https://drive.google.com/file/d/1aKW_9gviq_zSP9bPd4nysZa1-dMCrMHw/view?usp=sharing" target="_blank"><i class="fas fa-video"></i> Second Walkthrough</a>
+                </div>
+            </div>
+        </div>
+
         <div class="projects-grid">
 
             <div class="project-card fade-in">
                 <div class="project-image"><i class="fas fa-chart-pie"></i><span class="project-badge">Power BI</span></div>
                 <div class="project-info">
-                    <h3>Retail Sales Performance Dashboard</h3>  
+                    <h3>Retail Sales Performance Dashboard</h3>
                     <h4>Personal Project | Power BI, SQL | Feb 2026 – May 2026</h4>
                     <ul>
-                     <li>Built multi-level KPI dashboard using Power BI and SQL, tracking monthly trends, YoY performance and store-level insights, cutting business review time by 40%.</li>
-        <li>Enabled district, manager and product category reporting, accelerating decision-making speed for business review teams.</li>
+                     <li>Built a multi-level KPI dashboard in Power BI and SQL that tracks monthly trends, YoY performance, and store-level insight, cutting business review time by 40%.</li>
+        <li>Set up district, manager, and product category views so business teams could self-serve instead of waiting on ad-hoc reports.</li>
                     </ul>
                     <div class="project-tech">
                         <span class="tech-tag">Power BI</span><span class="tech-tag">DAX</span>
@@ -940,8 +1042,8 @@
                     <h3>Enterprise AI Adoption &amp; Productivity Analysis</h3>
     <h4>Personal Project | Python, Excel, Regression | Jan 2026 – Apr 2026</h4>
     <ul>
-        <li>Analysed 80 quarterly observations (2006–2025) using Python and Excel, building a multiple linear regression model achieving R&#178; of 0.786.</li>
-        <li>Delivered data-driven AI investment and workforce upskilling recommendations, directly influencing hiring strategy decisions.</li>
+        <li>Studied 80 quarterly observations (2006-2025) with Python and Excel, fitting a multiple linear regression model that reached an R&#178; of 0.786.</li>
+        <li>Turned the findings into concrete AI investment and workforce upskilling recommendations that fed into a real hiring strategy discussion.</li>
     </ul>
                   <div class="project-tech">
                         <span class="tech-tag">Python</span><span class="tech-tag">Pandas</span>
@@ -959,8 +1061,8 @@
                      <h3>Rice Price Prediction Model</h3>
     <h4>Personal Project | Python, Scikit-learn, ARIMA, Pandas, NumPy</h4>
                   <ul>
-        <li>Built an ARIMA time-series forecasting model using Scikit-learn and Pandas, achieving 85% prediction accuracy for future crop price movements.</li>
-        <li>Improved model robustness by applying feature engineering and cross-validation techniques, delivering reliable and production-ready output.</li>
+        <li>Built an ARIMA time-series model with Scikit-learn and Pandas that reaches 85% accuracy predicting crop price movements.</li>
+        <li>Applied feature engineering and cross-validation to make the model robust enough for production use.</li>
     </ul>  <div class="project-tech">
                         <span class="tech-tag">Python</span><span class="tech-tag">ARIMA</span>
                         <span class="tech-tag">Scikit-learn</span><span class="tech-tag">Pandas, NumPy</span>
@@ -975,7 +1077,7 @@
                 <div class="project-image"><i class="fas fa-shield-alt"></i><span class="project-badge">Security</span></div>
                 <div class="project-info">
                     <h3>Rudhra: Android Malware Detection Tool</h3>
-                    <p>Engineered an Android malware detection tool leveraging machine learning classification algorithms, achieving a 90% detection success rate. Implemented static code analysis to identify application-level vulnerabilities, delivering a lightweight, on-device security layer that protects end users from malicious applications.</p>
+                    <p>An Android malware detector built on ML classification, reaching a 90% detection rate. Uses static code analysis to flag app-level vulnerabilities as a lightweight, on-device security layer.</p>
                     <div class="project-tech">
                         <span class="tech-tag">Android</span><span class="tech-tag">Java</span>
                         <span class="tech-tag">Machine Learning</span><span class="tech-tag">Static Analysis</span>
@@ -990,7 +1092,7 @@
                 <div class="project-image"><i class="fas fa-microchip"></i><span class="project-badge">Embedded C</span></div>
                 <div class="project-info">
                     <h3>Embedded Systems Programming Training</h3>
-                    <p>Completed an intensive embedded systems training programme covering ATmega32 architecture, AVR Assembly, and low-level C/C++ programming. Designed and tested real hardware circuits including LED controllers, RGB drivers, and alarm clocks using Arduino and SPI communication. Delivered 8 graded assignments, all documented and version-controlled on GitHub.</p>
+                    <p>An embedded systems training programme covering ATmega32 architecture, AVR Assembly, and low-level C/C++. Built and tested real hardware, LED controllers, RGB drivers, and an alarm clock, using Arduino and SPI. Eight graded assignments, all documented on GitHub.</p>
                     <div class="project-tech">
                         <span class="tech-tag">Arduino</span><span class="tech-tag">ATmega32</span>
                         <span class="tech-tag">C/C++</span><span class="tech-tag">AVR Assembly</span>
@@ -1005,7 +1107,7 @@
                 <div class="project-image"><i class="fas fa-memory"></i><span class="project-badge">Proteus</span></div>
                 <div class="project-info">
                     <h3>Digital Systems &amp; Microcontrollers Training</h3>
-                    <p>Completed advanced embedded systems training focusing on peripheral interfacing and digital communication protocols. Developed a custom C driver for a 16&times;2 LCD, implemented full-duplex USART serial communication at the AVR register level, and built PWM-based LED brightness control using hardware timers. Validated all circuits in Proteus Design Suite prior to physical deployment.</p>
+                    <p>Advanced embedded training on peripheral interfacing and digital communication protocols: a custom C driver for a 16&times;2 LCD, full-duplex USART at the AVR register level, and PWM-based LED brightness control with hardware timers. Circuits validated in Proteus before physical builds.</p>
                     <div class="project-tech">
                         <span class="tech-tag">Embedded C</span><span class="tech-tag">USART</span>
                         <span class="tech-tag">PWM</span><span class="tech-tag">Proteus</span>
@@ -1020,7 +1122,7 @@
                 <div class="project-image"><i class="fas fa-mobile-alt"></i><span class="project-badge">IEEE Published</span></div>
                 <div class="project-info">
                     <h3>Mobifarmer: Agricultural Marketplace Platform</h3>
-                    <p>Architected a full-stack Android marketplace connecting farmers directly with local buyers via a proprietary location-matching algorithm, Firebase real-time backend, and an ML-powered crop price prediction model integrated at the point of sale. Published as a peer-reviewed research paper at IEEE ICICICT (January 2019), validating the platform's measurable impact on agricultural market access.</p>
+                    <p>A full-stack Android marketplace connecting farmers directly with local buyers through a location-matching algorithm, a Firebase real-time backend, and an ML-powered crop price model at the point of sale. Published at IEEE ICICICT (January 2019).</p>
                     <div class="project-tech">
                         <span class="tech-tag">Android</span><span class="tech-tag">Java</span>
                         <span class="tech-tag">Firebase</span><span class="tech-tag">Machine Learning</span>
@@ -1036,7 +1138,7 @@
                 <div class="project-image"><i class="fas fa-lock"></i><span class="project-badge">C#</span></div>
                 <div class="project-info">
                     <h3>Asthra: Steganographic Data Protection Tool</h3>
-                    <p>Designed a steganography tool that securely encrypts and embeds confidential data within image files, ensuring data integrity and privacy through robust encryption and decryption workflows. Optimised the core algorithm to reduce encryption and decryption processing time by 30%.</p>
+                    <p>A steganography tool that encrypts and embeds confidential data inside image files. Reworked the core algorithm to cut encryption and decryption time by 30%.</p>
                     <div class="project-tech">
                         <span class="tech-tag">C#</span><span class="tech-tag">Encryption</span>
                         <span class="tech-tag">Steganography</span><span class="tech-tag">Data Security</span>
@@ -1056,6 +1158,12 @@
     <div class="container">
         <div class="section-title fade-in"><h2>Certifications</h2></div>
         <div class="certifications-grid">
+            <div class="certification-card featured-cert fade-in">
+                <h3>McKinsey Forward Program &mdash; Professional &amp; Analytical Skills Certificate</h3>
+                <p><strong>Issued by:</strong> McKinsey &amp; Company | 2026</p>
+                <p><strong>Skills:</strong> Structured Problem-Solving, Data-Driven Decision-Making, Professional Communication</p>
+                <a href="https://www.credly.com/badges/62f50294-8fa6-4bf8-b6e5-179a7f568ec1/linked_in_profile" target="_blank"><i class="fas fa-external-link-alt"></i> View Certificate</a>
+            </div>
             <div class="certification-card fade-in">
                 <h3>Leadership Skills for the Future</h3>
                 <p><strong>Issued by:</strong> LinkedIn Learning</p>
@@ -1110,7 +1218,7 @@
             <h3>An Efficient Agricultural Marketing System for Optimising the Benefits of Farmers</h3>
             <p><strong>Authors:</strong> S. Krishna, M. S. Midhul, R. R. Pillai</p>
             <p><strong>Published in:</strong> IEEE ICICICT | January 2019</p>
-            <p style="margin-top:10px;">Contributed to the design of an Android and machine-learning-enabled framework to improve direct market access for smallholder farmers in India. The system reduces reliance on intermediaries and provides farmers with data-driven pricing guidance through an ML-powered crop price prediction model.</p>
+            <p style="margin-top:10px;">An Android and machine-learning framework built to improve direct market access for smallholder farmers in India, cutting reliance on intermediaries with an ML-powered crop price prediction model.</p>
             <a href="https://ieeexplore.ieee.org/document/8993386" target="_blank"><i class="fas fa-external-link-alt"></i> View on IEEE Xplore</a>
         </div>
     </div>
@@ -1124,19 +1232,19 @@
             <div class="achievement-card fade-in">
                 <h3>USTAR Recognition Award</h3>
                 <p><strong>UST Global</strong> | March 2023</p>
-                <p>Recognised for outstanding contributions in log analysis, driver debugging, triage, and validation. Awarded for expertise utilising Windows Performance Analyser to resolve complex hardware and software issues on Intel GPU programmes. Granted to fewer than 5% of contributors for exceptional impact.</p>
+                <p>Recognised for log analysis, driver debugging, triage, and validation work, using Windows Performance Analyser to resolve complex hardware and software issues on Intel GPU programmes. Granted to fewer than 5% of contributors.</p>
                 <a href="https://drive.google.com/file/d/1f8g3kelgKlTJa-kw-yBVt8wfsEWZCwUq/view" target="_blank"><i class="fas fa-external-link-alt"></i> View Award</a>
             </div>
             <div class="achievement-card fade-in">
                 <h3>Trivandrum UST Marathon</h3>
                 <p><strong>UST Global</strong> | October 2024</p>
-                <p>Completed the Trivandrum UST Marathon, demonstrating dedication to personal wellness, endurance, and team camaraderie.</p>
+                <p>Completed the Trivandrum UST Marathon.</p>
                 <a href="https://drive.google.com/file/d/1c_xM9aEafmBOwshF7WMXho_q2K3wbz4S/view" target="_blank"><i class="fas fa-external-link-alt"></i> View Certificate</a>
             </div>
             <div class="achievement-card fade-in">
                 <h3>IEEE Publication</h3>
                 <p><strong>IEEE ICICICT</strong> | January 2019</p>
-                <p>Co-authored a peer-reviewed research paper on agricultural marketing systems, presented at the International Conference on Innovations in Communication, Computing and Instrumentation. Recognised as a contribution to applied machine learning in the agricultural sector.</p>
+                <p>Co-authored a peer-reviewed paper on agricultural marketing systems, presented at the International Conference on Innovations in Communication, Computing and Instrumentation.</p>
             </div>
         </div>
     </div>
@@ -1162,7 +1270,7 @@
                     <a href="mailto:midhulmsofficial@gmail.com"><i class="fas fa-envelope"></i></a>
                 </div>
                 <div class="availability-box">
-                    <p>Actively seeking a <strong>6-month internship starting June 2026</strong> in Data Analytics, Business Intelligence, Data Engineering, or Digital Strategy. Based in Paris; open to opportunities across France and Europe.</p>
+                    <p>Actively looking for a <strong>6-month internship starting June 2026</strong> in Data Analytics, Business Intelligence, Data Engineering, or Digital Strategy. Based in Paris; open to opportunities across France and Europe.</p>
                 </div>
             </div>
             <div class="contact-form slide-right">
@@ -1190,7 +1298,7 @@
             <a href="https://github.com/midhulms" target="_blank"><i class="fab fa-github"></i></a>
             <a href="mailto:midhulmsofficial@gmail.com"><i class="fas fa-envelope"></i></a>
         </div>
-        <p class="copyright">&copy; 2025 Midhul M S. All rights reserved.</p>
+        <p class="copyright">&copy; 2026 Midhul M S. All rights reserved.</p>
     </div>
 </footer>
 
@@ -1243,6 +1351,173 @@
         requestAnimationFrame(draw);
     }
     draw();
+})();
+
+/* ── 3D Impact Bar Chart (isometric canvas, no dependencies) ── */
+(function() {
+    var canvas = document.getElementById('impact-chart-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var legendEl = document.getElementById('impact-legend');
+
+    var data = [
+        { label: 'Retail BI: review time cut',        value: 40, color: '#3b82f6' },
+        { label: 'IT support: resolution time cut',    value: 35, color: '#60a5fa' },
+        { label: 'Encryption: processing time cut',    value: 30, color: '#2563eb' },
+        { label: 'Rice price model: accuracy',         value: 85, color: '#10b981' },
+        { label: 'Malware detector: detection rate',   value: 90, color: '#34d399' },
+        { label: 'AI adoption study: R\u00B2 fit',      value: 79, color: '#a78bfa' }
+    ];
+
+    legendEl.innerHTML = data.map(function(d) {
+        return '<span><i style="background:' + d.color + '"></i>' + d.label + ' (' + d.value + '%)</span>';
+    }).join('');
+
+    var rotation = 0.6;
+    var tilt = 0.42;
+    var dragging = false;
+    var lastX = 0;
+    var autoRotate = true;
+
+    function resize() {
+        var wrap = canvas.parentElement;
+        canvas.width = wrap.clientWidth * devicePixelRatio;
+        canvas.height = 380 * devicePixelRatio;
+        canvas.style.width = wrap.clientWidth + 'px';
+        canvas.style.height = '380px';
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    function project(x, y, z, cx, cy, scale) {
+        // simple isometric-style projection with adjustable rotation/tilt
+        var cosR = Math.cos(rotation), sinR = Math.sin(rotation);
+        var x1 = x * cosR - z * sinR;
+        var z1 = x * sinR + z * cosR;
+        var y1 = y - z1 * tilt;
+        return { x: cx + x1 * scale, y: cy - y1 * scale };
+    }
+
+    function draw() {
+        var W = canvas.width / devicePixelRatio, H = canvas.height / devicePixelRatio;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.save();
+        ctx.scale(devicePixelRatio, devicePixelRatio);
+
+        var cx = W / 2, cy = H * 0.72, scale = Math.min(W / 9, 26);
+        var n = data.length;
+        var depth = 1.15;
+        var barWidth = 0.6;
+
+        // base grid
+        ctx.strokeStyle = 'rgba(148,163,184,0.15)';
+        for (var g = 0; g <= 4; g++) {
+            var gy = g * 25;
+            var p1 = project(-n * depth / 2 - 1, gy, -depth/2, cx, cy, scale);
+            var p2 = project(n * depth / 2 + 1, gy, -depth/2, cx, cy, scale);
+            ctx.beginPath(); ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
+        }
+
+        var bars = data.map(function(d, i) {
+            var bx = (i - (n - 1) / 2) * depth;
+            return { d: d, bx: bx };
+        });
+
+        // sort by depth so far bars draw first (basic painter's algorithm)
+        bars.sort(function(a, b) {
+            return Math.sin(rotation) * a.bx - Math.sin(rotation) * b.bx;
+        });
+
+        bars.forEach(function(item) {
+            var d = item.d, bx = item.bx;
+            var h = d.value * 0.9;
+            var x0 = bx - barWidth/2, x1 = bx + barWidth/2;
+            var z0 = -barWidth/2, z1 = barWidth/2;
+
+            var top = [
+                project(x0, h, z0, cx, cy, scale), project(x1, h, z0, cx, cy, scale),
+                project(x1, h, z1, cx, cy, scale), project(x0, h, z1, cx, cy, scale)
+            ];
+            var frontBottom = [project(x0, 0, z1, cx, cy, scale), project(x1, 0, z1, cx, cy, scale)];
+            var frontTop = [top[3], top[2]];
+            var sideBottom = [project(x1, 0, z0, cx, cy, scale), project(x1, 0, z1, cx, cy, scale)];
+            var sideTop = [top[1], top[2]];
+
+            // front face
+            ctx.beginPath();
+            ctx.moveTo(frontBottom[0].x, frontBottom[0].y);
+            ctx.lineTo(frontBottom[1].x, frontBottom[1].y);
+            ctx.lineTo(frontTop[1].x, frontTop[1].y);
+            ctx.lineTo(frontTop[0].x, frontTop[0].y);
+            ctx.closePath();
+            ctx.fillStyle = d.color;
+            ctx.fill();
+
+            // side face (darker)
+            ctx.beginPath();
+            ctx.moveTo(sideBottom[0].x, sideBottom[0].y);
+            ctx.lineTo(sideBottom[1].x, sideBottom[1].y);
+            ctx.lineTo(sideTop[1].x, sideTop[1].y);
+            ctx.lineTo(sideTop[0].x, sideTop[0].y);
+            ctx.closePath();
+            ctx.fillStyle = 'rgba(0,0,0,0.28)';
+            ctx.fillStyle = shade(d.color, -0.35);
+            ctx.fill();
+
+            // top face (lighter)
+            ctx.beginPath();
+            ctx.moveTo(top[0].x, top[0].y);
+            ctx.lineTo(top[1].x, top[1].y);
+            ctx.lineTo(top[2].x, top[2].y);
+            ctx.lineTo(top[3].x, top[3].y);
+            ctx.closePath();
+            ctx.fillStyle = shade(d.color, 0.25);
+            ctx.fill();
+
+            // value label
+            var labelPos = project(bx, h + 8, 0, cx, cy, scale);
+            ctx.fillStyle = '#e2e8f0';
+            ctx.font = '600 12px Montserrat, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText(d.value + '%', labelPos.x, labelPos.y);
+        });
+
+        ctx.restore();
+    }
+
+    function shade(hex, amt) {
+        var col = hex.replace('#', '');
+        var num = parseInt(col, 16);
+        var r = (num >> 16), g = (num >> 8 & 0x00FF), b = (num & 0x0000FF);
+        r = Math.min(255, Math.max(0, r + amt * 255));
+        g = Math.min(255, Math.max(0, g + amt * 255));
+        b = Math.min(255, Math.max(0, b + amt * 255));
+        return 'rgb(' + (r|0) + ',' + (g|0) + ',' + (b|0) + ')';
+    }
+
+    canvas.addEventListener('pointerdown', function(e) {
+        dragging = true; autoRotate = false; lastX = e.clientX;
+    });
+    window.addEventListener('pointerup', function() { dragging = false; });
+    window.addEventListener('pointermove', function(e) {
+        if (!dragging) return;
+        var dx = e.clientX - lastX;
+        rotation += dx * 0.008;
+        lastX = e.clientX;
+    });
+
+    function loop() {
+        if (autoRotate) rotation += 0.0025;
+        draw();
+        requestAnimationFrame(loop);
+    }
+
+    var chartObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+            if (e.isIntersecting) { loop(); chartObserver.disconnect(); }
+        });
+    }, { threshold: 0.1 });
+    chartObserver.observe(canvas);
 })();
 
 /* ── Typing Effect ── */
@@ -1301,6 +1576,25 @@ document.getElementById('backToTop').addEventListener('click', function() {
         a.addEventListener('click', function() {
             h.classList.remove('active');
             m.classList.remove('open');
+        });
+    });
+})();
+
+/* ── 3D Tilt on Project Cards ── */
+(function() {
+    if (window.matchMedia && window.matchMedia('(hover: none), (pointer: coarse)').matches) return;
+    var cards = document.querySelectorAll('.project-card');
+    cards.forEach(function(card) {
+        card.addEventListener('mousemove', function(e) {
+            var r = card.getBoundingClientRect();
+            var px = (e.clientX - r.left) / r.width;
+            var py = (e.clientY - r.top) / r.height;
+            var rotateY = (px - 0.5) * 14;
+            var rotateX = (0.5 - py) * 14;
+            card.style.transform = 'translateY(-8px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
+        });
+        card.addEventListener('mouseleave', function() {
+            card.style.transform = 'translateY(0) rotateX(0) rotateY(0)';
         });
     });
 })();

@@ -868,7 +868,7 @@
             <div class="timeline-item left fade-in">
                 <div class="timeline-content">
                     <h3>Associate I, Semiconductor Product Validation</h3>
-                    <h4>UST Global (Client: Intel) | Sep 2023 &ndash; Oct 2024 | Trivandrum</h4>
+                    <h4>UST Global (Client: Intel) | Sep 2023 &ndash; Sep 2024 | Bengaluru</h4>
                     <ul>
         <li>Handled the DG2 platform Intel driver (GPU validation, debugging, and testing) team.</li>
         <li>Triaged major issues in the DG2 production driver.</li>
@@ -1390,7 +1390,6 @@
     resize();
 
     function project(x, y, z, cx, cy, scale) {
-        // simple isometric-style projection with adjustable rotation/tilt
         var cosR = Math.cos(rotation), sinR = Math.sin(rotation);
         var x1 = x * cosR - z * sinR;
         var z1 = x * sinR + z * cosR;
@@ -1409,7 +1408,6 @@
         var depth = 1.15;
         var barWidth = 0.6;
 
-        // base grid
         ctx.strokeStyle = 'rgba(148,163,184,0.15)';
         for (var g = 0; g <= 4; g++) {
             var gy = g * 25;
@@ -1423,7 +1421,6 @@
             return { d: d, bx: bx };
         });
 
-        // sort by depth so far bars draw first (basic painter's algorithm)
         bars.sort(function(a, b) {
             return Math.sin(rotation) * a.bx - Math.sin(rotation) * b.bx;
         });
@@ -1443,7 +1440,6 @@
             var sideBottom = [project(x1, 0, z0, cx, cy, scale), project(x1, 0, z1, cx, cy, scale)];
             var sideTop = [top[1], top[2]];
 
-            // front face
             ctx.beginPath();
             ctx.moveTo(frontBottom[0].x, frontBottom[0].y);
             ctx.lineTo(frontBottom[1].x, frontBottom[1].y);
@@ -1453,7 +1449,6 @@
             ctx.fillStyle = d.color;
             ctx.fill();
 
-            // side face (darker)
             ctx.beginPath();
             ctx.moveTo(sideBottom[0].x, sideBottom[0].y);
             ctx.lineTo(sideBottom[1].x, sideBottom[1].y);
@@ -1464,7 +1459,6 @@
             ctx.fillStyle = shade(d.color, -0.35);
             ctx.fill();
 
-            // top face (lighter)
             ctx.beginPath();
             ctx.moveTo(top[0].x, top[0].y);
             ctx.lineTo(top[1].x, top[1].y);
@@ -1474,7 +1468,6 @@
             ctx.fillStyle = shade(d.color, 0.25);
             ctx.fill();
 
-            // value label
             var labelPos = project(bx, h + 8, 0, cx, cy, scale);
             ctx.fillStyle = '#e2e8f0';
             ctx.font = '600 12px Montserrat, sans-serif';

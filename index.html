@@ -816,7 +816,7 @@
         <div class="about-content">
             <div class="about-text slide-left">
 
-                <p data-i18n="about.p1">I&rsquo;m pursuing an MSc in Digital Business &amp; Analytics at &Eacute;cole de Management L&eacute;onard de Vinci in Paris, focused on forecasting models, Power BI dashboards, and agentic AI workflows built with LangGraph and n8n. I hold a DELF A2 certification in French and am currently working toward B1.</p>
+                <p data-i18n="about.p1">I&rsquo;m pursuing an MSc in Digital Business &amp; Analytics at &Eacute;cole de Management L&eacute;onard de Vinci in Paris, focused on forecasting models, Power BI dashboards, and agentic AI workflows built with LangGraph and n8n, with experience building agentic AI workflows that make analytical models accessible to business users. I hold a DELF A2 certification in French and am currently working toward B1.</p>
                 <p data-i18n="about.p2">Throughout my master&rsquo;s programme, I work daily with <strong>Python, SQL</strong>, and tools such as <strong>Power BI, Excel, Tableau, and CRM systems</strong>, complemented by <strong>Snowflake, Databricks, dbt, and BigQuery</strong> for data modelling and warehousing.</p>
                 <p data-i18n="about.p3">Prior to my transition into analytics, I spent three years debugging Intel graphics drivers using WinDbg, Windows Performance Analyzer, Xperf, and GPUView log analysis, applying code-level debugging on the DG1 and DG2 platforms. During this time, I also built internal monitoring and reporting tools with Apache Superset, FastAPI, Flask, React, and Node.js.</p>
                 <p data-i18n="about.p4">I am currently seeking a <strong>six-month internship for my Master&rsquo;s programme, 2026&ndash;2027</strong>.</p>
@@ -1057,6 +1057,8 @@
                     <span class="stag">ARIMA</span><span class="stag">DAX</span><span class="stag">Excel</span>
                     <span class="stag">Databricks</span><span class="stag">Snowflake</span><span class="stag">dbt</span>
                     <span class="stag">BigQuery</span><span class="stag">Git</span><span class="stag">Jira</span>
+                    <span class="stag">SAS Viya</span><span class="stag">SAS Retrieval Agent Manager</span><span class="stag">MCP</span>
+                    <span class="stag">OpenAPI</span><span class="stag">Prompt Engineering</span><span class="stag">Retrieval (RAG)</span>
                 </div>
             </div>
             <div class="skill-category fade-in">
@@ -1109,6 +1111,24 @@
         </div>
 
         <div class="projects-grid">
+
+            <div class="project-card fade-in">
+                <div class="project-image"><i class="fas fa-robot"></i><span class="project-badge">SAS Hackathon</span></div>
+                <div class="project-info">
+                    <h3 data-i18n="proj.sas.title">FutureProof Monte Carlo &ndash; SAS Hackathon 2026</h3>
+                    <h4>Financial Services track | SAS Viya</h4>
+                    <ul>
+                        <li data-i18n="proj.sas.b1">Developed the agentic AI layer for a retirement Monte Carlo simulator on SAS Viya, using SAS Retrieval Agent Manager: master prompt, embedding-based retrieval, testing and tuning.</li>
+                        <li data-i18n="proj.sas.b2">Connected the agent to the simulation as an MCP tool, so it runs the model with the user&rsquo;s retirement inputs and explains the results in plain language.</li>
+                        <li data-i18n="proj.sas.b3">Designed limited-access controls: user-granted, time-limited API access and security rules for the agent.</li>
+                    </ul>
+                    <div class="project-tech">
+                        <span class="tech-tag">SAS Viya</span><span class="tech-tag">Retrieval Agent Manager</span>
+                        <span class="tech-tag">MCP</span><span class="tech-tag">RAG</span>
+                        <span class="tech-tag">Prompt Engineering</span>
+                    </div>
+                </div>
+            </div>
 
             <div class="project-card fade-in">
                 <div class="project-image"><i class="fas fa-chart-pie"></i><span class="project-badge">Power BI</span></div>
@@ -1334,6 +1354,11 @@
                 <p><strong>UST Global</strong> | October 2024</p>
                 <p data-i18n="ach.a2.body">Completed the Trivandrum UST Marathon.</p>
                 <a href="https://drive.google.com/file/d/1c_xM9aEafmBOwshF7WMXho_q2K3wbz4S/view" target="_blank"><i class="fas fa-external-link-alt"></i> <span data-i18n="cert.viewCert">View Certificate</span></a>
+            </div>
+            <div class="achievement-card fade-in">
+                <h3 data-i18n="ach.a4.title">SAS Hackathon 2026</h3>
+                <p><strong>SAS</strong> | Financial Services track</p>
+                <p data-i18n="ach.a4.body">Team participant, FutureProof Monte Carlo project.</p>
             </div>
             <div class="achievement-card fade-in">
                 <h3 data-i18n="ach.a3.title">IEEE Publication</h3>
@@ -1851,7 +1876,7 @@ var translations = {
         'hero.stat1': "Années d'expérience", 'hero.stat2': 'Précision du modèle %',
         'hero.stat3': 'Projets livrés', 'hero.stat4': 'Livraison à temps %',
         'about.title': 'À propos de moi',
-        'about.p1': "Je poursuis un MSc en Digital Business & Analytics à l\u2019École de Management Léonard de Vinci à Paris, centré sur les modèles de prévision, les tableaux de bord Power BI et les workflows d\u2019IA agentique construits avec LangGraph et n8n. Je détiens le DELF A2 en français et prépare actuellement le niveau B1.",
+        'about.p1': "Je poursuis un MSc en Digital Business & Analytics à l\u2019École de Management Léonard de Vinci à Paris, centré sur les modèles de prévision, les tableaux de bord Power BI et les workflows d\u2019IA agentique construits avec LangGraph et n8n, avec une expérience dans la création de workflows d\u2019IA agentique qui rendent les modèles analytiques accessibles aux utilisateurs métier. Je détiens le DELF A2 en français et prépare actuellement le niveau B1.",
         'about.p2': "Tout au long de mon master, j\u2019utilise quotidiennement <strong>Python, SQL</strong>, ainsi que des outils tels que <strong>Power BI, Excel, Tableau et des systèmes CRM</strong>, complétés par <strong>Snowflake, Databricks, dbt et BigQuery</strong> pour la modélisation et l\u2019entreposage de données.",
         'about.p3': "Avant ma transition vers l\u2019analytique, j\u2019ai passé trois ans à déboguer des pilotes graphiques Intel à l\u2019aide de WinDbg, Windows Performance Analyzer, Xperf et de l\u2019analyse de journaux GPUView, en appliquant un débogage au niveau du code sur les plateformes DG1 et DG2. Durant cette période, j\u2019ai également développé des outils internes de surveillance et de reporting avec Apache Superset, FastAPI, Flask, React et Node.js.",
         'about.p4': "Je recherche actuellement un <strong>stage de six mois pour mon programme de master, 2026\u20132027</strong>.",
@@ -1946,6 +1971,12 @@ var translations = {
         'ach.viewAward': 'Voir la distinction',
         'ach.a2.title': 'Marathon UST de Trivandrum',
         'ach.a2.body': 'A terminé le Marathon UST de Trivandrum.',
+        'proj.sas.title': 'FutureProof Monte Carlo \u2013 SAS Hackathon 2026',
+        'proj.sas.b1': "A d\u00e9velopp\u00e9 la couche d\u2019IA agentique d\u2019un simulateur Monte Carlo de retraite sur SAS Viya, avec SAS Retrieval Agent Manager\u00a0: prompt principal, r\u00e9cup\u00e9ration par embeddings, tests et r\u00e9glage.",
+        'proj.sas.b2': "A connect\u00e9 l\u2019agent \u00e0 la simulation en tant qu\u2019outil MCP, afin qu\u2019il ex\u00e9cute le mod\u00e8le avec les donn\u00e9es de retraite de l\u2019utilisateur et explique les r\u00e9sultats en langage clair.",
+        'proj.sas.b3': "A con\u00e7u des contr\u00f4les d\u2019acc\u00e8s limit\u00e9s\u00a0: acc\u00e8s API accord\u00e9 par l\u2019utilisateur et limit\u00e9 dans le temps, et r\u00e8gles de s\u00e9curit\u00e9 pour l\u2019agent.",
+        'ach.a4.title': 'SAS Hackathon 2026',
+        'ach.a4.body': 'Participant de l\u2019\u00e9quipe, projet FutureProof Monte Carlo.',
         'ach.a3.title': 'Publication IEEE',
         'ach.a3.body': "Co-auteur d\u2019un article évalué par des pairs sur les systèmes de commercialisation agricole, présenté à la conférence internationale sur les innovations en communication, informatique et instrumentation.",
         'contact.title': 'Me Contacter', 'contact.infoTitle': 'Coordonnées',
